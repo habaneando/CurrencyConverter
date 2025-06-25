@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Currency\GetExchangeRates\" />
+    <Folder Include="Features\Currency\ConvertAmount\" />
+    <Folder Include="Features\Currency\GetHistoricalExchangeRates\" />
+  </ItemGroup>
+
 </Project>
