@@ -1,8 +1,7 @@
-using System.Security.Cryptography;
-using CurrencyConverter.Api;
-using CurrencyConverter.Application;
 using CurrencyConverter.Domain;
+using CurrencyConverter.Application;
 using CurrencyConverter.Infrastructure;
+using CurrencyConverter.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 

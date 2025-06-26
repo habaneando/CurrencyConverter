@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace CurrencyConverter.Infrastructure;
+﻿namespace CurrencyConverter.Infrastructure;
 
 public static class DI
 {
