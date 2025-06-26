@@ -12,7 +12,7 @@
     <Folder Include="Events\" />
     <Folder Include="EventHandlerContracts\" />
     <Folder Include="DomainServices\" />
-    <Folder Include="InfrastructureServiceContracts\" />
+    <Folder Include="ExternalServiceContracts\" />
     <Folder Include="ValueObjects\" />
   </ItemGroup>
 
