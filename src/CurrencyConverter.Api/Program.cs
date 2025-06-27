@@ -4,12 +4,16 @@ using CurrencyConverter.Domain;
 using CurrencyConverter.Infrastructure;
 using FastEndpoints;
 using Scalar.AspNetCore;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddFastEndpoints();
 
 builder.Services.AddOpenApi();
+
+builder.Services.AddRefitClient<ICurrencyRateService>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.frankfurter.dev"));
 
 builder.Services.AddDomain();
 builder.Services.AddApplication();

@@ -1,5 +1,4 @@
 ﻿global using Microsoft.Extensions.DependencyInjection;
-global using System.Security.Cryptography;
 global using System.ComponentModel;
 global using System.Text.Json.Serialization;
 global using System.Diagnostics.CodeAnalysis;

@@ -1,0 +1,22 @@
+﻿using FastEndpoints;
+
+namespace CurrencyConverter.Api;
+
+internal class GetRatesEndpoint(ICurrencyRateService CurrencyRateService) 
+    : EndpointWithoutRequest<GetRatesResponse, GetRatesMapper>
+{
+    public override void Configure()
+    {
+        Get("/rate");
+        AllowAnonymous();
+    }
+
+    public override async Task HandleAsync(CancellationToken ct)
+    {
+        var currentRate = await CurrencyRateService.GetRatesAsync();
+
+        var getRatesResponse = Map.FromEntity(currentRate);
+
+        await SendOkAsync(getRatesResponse, ct).ConfigureAwait(false);
+    }
+}

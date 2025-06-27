@@ -5,6 +5,7 @@
     <PackageReference Include="FastEndpoints.Swagger" />
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Refit.HttpClientFactory" />
     <PackageReference Include="Scalar.AspNetCore" />
     
   </ItemGroup>
