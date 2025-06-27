@@ -4,7 +4,7 @@ internal sealed record GetRatesByCurrencyResponse
 {
     public required string Base { get; init; }
     
-    public required string Date { get; init; }
+    public required DateTime Date { get; init; }
 
-    public IReadOnlyList<Domain.Money> Rates { get; init; } = [];
+    public Dictionary<string, float> Rates { get; init; }
 }

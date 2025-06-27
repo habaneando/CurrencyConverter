@@ -12,5 +12,5 @@ public class CurrencyRate2
     public DateTime Date { get; set; }
 
     [JsonPropertyName("rates")]
-    public Rates Rates { get; set; }
+    public Dictionary<string, float> Rates { get; set; }
 }

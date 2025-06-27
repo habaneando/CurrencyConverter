@@ -14,10 +14,7 @@ internal class GetRatesByCurrencyEndpoint
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest req, CancellationToken ct)
     {
-        var currencyRate = new CurrencyRate(
-            req.currency,
-            DateTime.Today.ToString(new CultureInfo("en-US")),
-            new List<Money>());
+        var currencyRate = new CurrencyRate2();
 
         if (currencyRate.Base is null)
         {

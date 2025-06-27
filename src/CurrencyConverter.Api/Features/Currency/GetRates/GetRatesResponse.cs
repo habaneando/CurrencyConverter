@@ -10,5 +10,5 @@ internal sealed record GetRatesResponse
 
     public required DateTime Date { get; init; }
 
-    public Rates Rates { get; init; }
+    public Dictionary<string, float> Rates { get; init; }
 }
