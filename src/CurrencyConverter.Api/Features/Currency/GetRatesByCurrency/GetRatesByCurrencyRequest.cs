@@ -1,3 +1,3 @@
 ﻿namespace CurrencyConverter.Api;
 
-internal sealed record GetRatesByCurrencyRequest(string Currency);
+internal sealed record GetRatesByCurrencyRequest(string currency);

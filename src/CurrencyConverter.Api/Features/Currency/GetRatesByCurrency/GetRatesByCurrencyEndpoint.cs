@@ -8,14 +8,14 @@ internal class GetRatesByCurrencyEndpoint
 {
     public override void Configure()
     {
-        Get("/currency/rate/{currency}");
+        Get("/rate/{currency}");
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest req, CancellationToken ct)
     {
         var currencyRate = new CurrencyRate(
-            req.Currency,
+            req.currency,
             DateTime.Today.ToString(new CultureInfo("en-US")),
             new List<Money>());
 
