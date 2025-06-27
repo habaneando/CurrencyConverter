@@ -8,7 +8,7 @@ internal class GetRatesByCurrencyEndpoint
 {
     public override void Configure()
     {
-        Get("/currency/rates/{currency}");
+        Get("/currency/rate/{currency}");
         AllowAnonymous();
     }
 
