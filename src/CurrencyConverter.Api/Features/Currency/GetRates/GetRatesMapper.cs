@@ -3,9 +3,9 @@ using FastEndpoints;
 
 namespace CurrencyConverter.Api;
 
-internal sealed class GetRatesMapper : ResponseMapper<GetRatesResponse,CurrencyRate2>
+internal sealed class GetRatesMapper : ResponseMapper<GetRatesResponse,CurrencyRate>
 {
-    public override GetRatesResponse FromEntity(CurrencyRate2 currencyRate) =>
+    public override GetRatesResponse FromEntity(CurrencyRate currencyRate) =>
         new()
         {
             Amount = currencyRate.Amount,
