@@ -6,17 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Shouldly" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\CurrencyConverter.Api\CurrencyConverter.Api.csproj" />
-    <ProjectReference Include="..\..\src\CurrencyConverter.Application\CurrencyConverter.Application.csproj" />
-    <ProjectReference Include="..\..\src\CurrencyConverter.Domain\CurrencyConverter.Domain.csproj" />
-    <ProjectReference Include="..\..\src\CurrencyConverter.Infrastructure\CurrencyConverter.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
