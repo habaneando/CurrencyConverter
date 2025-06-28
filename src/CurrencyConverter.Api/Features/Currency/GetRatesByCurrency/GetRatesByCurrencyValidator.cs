@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using CurrencyConverter.Domain;
+using FastEndpoints;
 using FluentValidation;
 
 namespace CurrencyConverter.Api;
@@ -10,7 +11,12 @@ internal sealed class GetRatesByCurrencyValidator : Validator<GetRatesByCurrency
         RuleFor(x => x.currency)
             .NotEmpty()
             .WithMessage("Currency cannot be empty.")
-            .Matches(@"^[A-Za-z]{3}$")
-            .WithMessage("Currency must be a valid 3-letter ISO code.");
+            .Custom((value, context) =>
+            {
+                if (CurrencyCode.TryCreate(value) is null)
+                {
+                    context.AddFailure("Currency must be a valid 3-letter ISO code.");
+                }
+            });
     }   
 }
