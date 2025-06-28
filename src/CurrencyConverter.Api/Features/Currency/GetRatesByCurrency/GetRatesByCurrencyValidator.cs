@@ -1,12 +1,13 @@
 ﻿using FastEndpoints;
+using FluentValidation;
 
 namespace CurrencyConverter.Api;
 
 internal sealed class GetRatesByCurrencyValidator : Validator<GetRatesByCurrencyRequest>
 {
-    public GetRatesByCurrencyValidator(CurrencyCodeValidator currencyCodeValidator)
+    public GetRatesByCurrencyValidator(ICurrencyCodeValidator currencyCodeValidator)
     {
         RuleFor(x => x.currency)
-            .SetValidator(currencyCodeValidator);
+            .SetValidator(currencyCodeValidator as AbstractValidator<string>);
     }   
 }

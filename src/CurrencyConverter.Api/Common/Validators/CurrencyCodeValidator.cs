@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CurrencyConverter.Api;
 
-public class CurrencyCodeValidator : AbstractValidator<string>
+public class CurrencyCodeValidator : AbstractValidator<string>, ICurrencyCodeValidator
 {
     public CurrencyCodeValidator()
     {
