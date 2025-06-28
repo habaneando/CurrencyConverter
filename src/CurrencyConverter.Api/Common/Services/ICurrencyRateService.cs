@@ -5,7 +5,8 @@ namespace CurrencyConverter.Api;
 
 public interface ICurrencyRateService
 {
-    const string version = "v1";
+    [Get("/v1/currencies")]
+    Task<Dictionary<string, string>> GetCurrenciesAsync();
 
     [Get("/v1/latest")]
     Task<CurrencyRate> GetRatesAsync();
