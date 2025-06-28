@@ -14,7 +14,7 @@ internal class GetRatesByCurrencyEndpoint(IGetRatesByCurrencyService CurrencyRat
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest req, CancellationToken ct)
     {
-        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(req.currency);
+        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(req.currency).ConfigureAwait(false);
 
         var getRatesResponse = Map.FromEntity(currentRate);
 

@@ -14,7 +14,7 @@ internal class ConvertCurrencyEndpoint(IConvertCurrencyService CurrencyRateServi
 
     public override async Task HandleAsync(ConvertCurrencyRequest req, CancellationToken ct)
     {
-        var currentRate = await CurrencyRateService.ConvertCurrencyAsync(req.currency, req.symbols, req.amount);
+        var currentRate = await CurrencyRateService.ConvertCurrencyAsync(req.currency, req.symbols, req.amount).ConfigureAwait(false);
 
         var getRatesResponse = Map.FromEntity(currentRate);
 
