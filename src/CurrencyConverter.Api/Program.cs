@@ -27,6 +27,7 @@ builder.Services.AddRefitClient<ICurrencyRateService>(
 builder.Services.AddDomain();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure("");
+builder.Services.AddApi();  
 
 var app = builder.Build();
 
