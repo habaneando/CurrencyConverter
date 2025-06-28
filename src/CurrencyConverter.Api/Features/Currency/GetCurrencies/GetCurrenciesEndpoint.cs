@@ -7,7 +7,8 @@ internal class GetCurrenciesEndpoint(IGetCurrenciesService CurrencyRateService)
 {
     public override void Configure()
     {
-        Get("/api/v1/currencies");
+        Get("/currencies");
+        Group<ApiV1Group>();
         AllowAnonymous();
     }
 

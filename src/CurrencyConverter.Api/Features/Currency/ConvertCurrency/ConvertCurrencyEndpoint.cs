@@ -7,7 +7,8 @@ internal class ConvertCurrencyEndpoint(IConvertCurrencyService CurrencyRateServi
 {
     public override void Configure()
     {
-        Get("/api/v1/exchange-rates/{currency}/{symbols}/{amount}");
+        Get("/exchange-rates/{currency}/{symbols}/{amount}");
+        Group<ApiV1Group>();
         AllowAnonymous();
     }
 
