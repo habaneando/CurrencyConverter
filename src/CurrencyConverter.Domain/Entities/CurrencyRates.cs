@@ -1,6 +1,6 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public sealed record CurrencyRate
+public sealed record CurrencyRates
 {
     [JsonPropertyName("amount")]
     public float Amount { get; set; }

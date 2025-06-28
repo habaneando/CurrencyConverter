@@ -6,5 +6,5 @@ namespace CurrencyConverter.Api;
 public interface IConvertCurrencyService
 {
     [Get("/v1/latest")]
-    Task<CurrencyRate> ConvertCurrencyAsync([Query] string @base, [Query] string symbols, [Query] float amount);
+    Task<CurrencyRates> ConvertCurrencyAsync([Query] string @base, [Query] string symbols, [Query] float amount);
 }

@@ -3,14 +3,14 @@ using FastEndpoints;
 
 namespace CurrencyConverter.Api;
 
-internal sealed class GetRatesMapper : ResponseMapper<GetRatesResponse,CurrencyRate>
+internal sealed class GetRatesMapper : ResponseMapper<GetRatesResponse,CurrencyRates>
 {
-    public override GetRatesResponse FromEntity(CurrencyRate currencyRate) =>
+    public override GetRatesResponse FromEntity(CurrencyRates currencyRates) =>
         new()
         {
-            Amount = currencyRate.Amount,
-            Base = currencyRate.Base,
-            Date = currencyRate.Date,
-            Rates = currencyRate.Rates
+            Amount = currencyRates.Amount,
+            Base = currencyRates.Base,
+            Date = currencyRates.Date,
+            Rates = currencyRates.Rates
         };
 }
