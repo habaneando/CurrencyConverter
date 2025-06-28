@@ -7,14 +7,13 @@ internal class GetRatesByCurrencyEndpoint(ICurrencyRateService CurrencyRateServi
 {
     public override void Configure()
     {
-        Get("/rate2/{base}");
+        Get("/rate2/{currency}");
         AllowAnonymous();
-        
     }
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest req, CancellationToken ct)
     {
-        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(req.@base);
+        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(req.currency);
 
         var getRatesResponse = Map.FromEntity(currentRate);
 

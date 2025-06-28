@@ -1,10 +1,5 @@
-﻿using FastEndpoints;
-using Refit;
+﻿using Refit;
 
 namespace CurrencyConverter.Api;
 
-internal sealed record GetRatesByCurrencyRequest()
-{
-    [Query("base")]
-    public string @base { get; set; }
-};
+internal sealed record GetRatesByCurrencyRequest([Query("currency")] string currency);

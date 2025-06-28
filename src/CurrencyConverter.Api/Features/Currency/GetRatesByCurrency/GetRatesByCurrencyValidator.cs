@@ -7,7 +7,7 @@ internal sealed class GetRatesByCurrencyValidator : Validator<GetRatesByCurrency
 {
     public GetRatesByCurrencyValidator()
     {
-        RuleFor(x => x.@base)
+        RuleFor(x => x.currency)
             .NotEmpty()
             .WithMessage("Currency cannot be empty.")
             .Matches(@"^[A-Z]{3}$")
