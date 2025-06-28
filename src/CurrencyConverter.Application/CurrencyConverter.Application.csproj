@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <Folder Include="Features\Currency\ConvertAmount\" />
+    <Folder Include="Features\Currency\ConvertCurrency\" />
     <Folder Include="Features\Currency\GetExchangeRates\" />
     <Folder Include="Features\Currency\GetHistoricalExchangeRates\" />
   </ItemGroup>

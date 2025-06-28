@@ -12,4 +12,7 @@ public interface ICurrencyRateService
 
     [Get("/v1/latest")]
     Task<CurrencyRate> GetRatesByCurrencyAsync([Query] string @base);
+
+    [Get("/v1/latest")]
+    Task<CurrencyRate> ConvertCurrencyAsync([Query] string @base, [Query] string symbols, [Query] float amount);
 }
