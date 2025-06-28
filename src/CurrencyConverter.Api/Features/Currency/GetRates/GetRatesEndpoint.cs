@@ -7,7 +7,7 @@ internal class GetRatesEndpoint(IGetRatesService CurrencyRateService)
 {
     public override void Configure()
     {
-        Get("/rate");
+        Get("/api/v1/rates");
         AllowAnonymous();
     }
 
