@@ -5,9 +5,11 @@ namespace CurrencyConverter.Api;
 
 public interface ICurrencyRateService
 {
+    const string version = "v1";
+
     [Get("/v1/latest")]
     Task<CurrencyRate> GetRatesAsync();
 
-    //[Get("/rates/{currency}")]
-    //Task<CurrencyRate2> GetRatesByCurrencyAsync(string currency);
+    [Get("/v1/latest")]
+    Task<CurrencyRate> GetRatesByCurrencyAsync([Query] string @base);
 }

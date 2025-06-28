@@ -1,29 +1,22 @@
-﻿using CurrencyConverter.Domain;
-using FastEndpoints;
+﻿using FastEndpoints;
 
 namespace CurrencyConverter.Api;
 
-internal class GetRatesByCurrencyEndpoint 
+internal class GetRatesByCurrencyEndpoint(ICurrencyRateService CurrencyRateService) 
     : Endpoint<GetRatesByCurrencyRequest, GetRatesByCurrencyResponse, GetRatesByCurrencyMapper>
 {
     public override void Configure()
     {
-        Get("/rate/{currency}");
+        Get("/rate2");
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest req, CancellationToken ct)
     {
-        var currencyRate = new CurrencyRate();
+        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(req.@base);
 
-        if (currencyRate.Base is null)
-        {
-            await SendNotFoundAsync(ct).ConfigureAwait(false);
-            return;
-        }
+        var getRatesResponse = Map.FromEntity(currentRate);
 
-        var response = Map.FromEntity(currencyRate);
-
-        await SendOkAsync(response, ct).ConfigureAwait(false);
+        await SendOkAsync(getRatesResponse, ct).ConfigureAwait(false);
     }
 }

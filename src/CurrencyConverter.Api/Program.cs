@@ -3,7 +3,6 @@ using CurrencyConverter.Application;
 using CurrencyConverter.Domain;
 using CurrencyConverter.Infrastructure;
 using FastEndpoints;
-using Scalar.AspNetCore;
 using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +11,17 @@ builder.Services.AddFastEndpoints();
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddRefitClient<ICurrencyRateService>()
+builder.Services.AddRefitClient<ICurrencyRateService>(
+    new RefitSettings
+    {
+        ContentSerializer = new SystemTextJsonContentSerializer(
+            new JsonSerializerOptions
+            {
+                Converters = { new DateTimeYyyyMMddConverter() },
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            })
+    })
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.frankfurter.dev"));
 
 builder.Services.AddDomain();
@@ -25,13 +34,11 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 
-    app.MapScalarApiReference(options =>
-    {
-        options
-            .WithTitle("Currency Rate API Documentation")
-            .WithTheme(ScalarTheme.BluePlanet)
-            .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
-    });
+    app.AddSwagger();
+
+    app.AddScalar();
+
+    app.AddReDoc(); 
 }
 
 app.UseHttpsRedirection();

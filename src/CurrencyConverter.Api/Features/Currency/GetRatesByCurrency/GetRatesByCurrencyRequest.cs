@@ -1,3 +1,5 @@
-﻿namespace CurrencyConverter.Api;
+﻿using Refit;
 
-internal sealed record GetRatesByCurrencyRequest(string currency);
+namespace CurrencyConverter.Api;
+
+internal sealed record GetRatesByCurrencyRequest([Query] string @base);
