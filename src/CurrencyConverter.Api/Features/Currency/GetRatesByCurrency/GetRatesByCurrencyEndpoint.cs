@@ -2,7 +2,7 @@
 
 namespace CurrencyConverter.Api;
 
-internal class GetRatesByCurrencyEndpoint(ICurrencyRateService CurrencyRateService) 
+internal class GetRatesByCurrencyEndpoint(IGetRatesByCurrencyService CurrencyRateService) 
     : Endpoint<GetRatesByCurrencyRequest, GetRatesByCurrencyResponse, GetRatesByCurrencyMapper>
 {
     public override void Configure()
