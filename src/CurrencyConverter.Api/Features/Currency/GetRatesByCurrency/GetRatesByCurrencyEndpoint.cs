@@ -7,8 +7,9 @@ internal class GetRatesByCurrencyEndpoint(ICurrencyRateService CurrencyRateServi
 {
     public override void Configure()
     {
-        Get("/rate2");
+        Get("/rate2/{base}");
         AllowAnonymous();
+        
     }
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest req, CancellationToken ct)
