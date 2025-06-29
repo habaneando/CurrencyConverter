@@ -12,12 +12,14 @@ internal class GetRatesByCurrencyEndpoint(IGetRatesByCurrencyService CurrencyRat
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(GetRatesByCurrencyRequest req, CancellationToken ct)
+    public override async Task HandleAsync(GetRatesByCurrencyRequest getRatesByCurrencyRequest, CancellationToken ct)
     {
-        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(req.currency).ConfigureAwait(false);
+        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(getRatesByCurrencyRequest.currency)
+            .ConfigureAwait(false);
 
         var getRatesResponse = Map.FromEntity(currentRate);
 
-        await SendOkAsync(getRatesResponse, ct).ConfigureAwait(false);
+        await SendOkAsync(getRatesResponse, ct)
+            .ConfigureAwait(false);
     }
 }

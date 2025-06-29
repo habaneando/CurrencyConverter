@@ -14,10 +14,12 @@ internal class GetCurrenciesEndpoint(IGetCurrenciesService CurrencyRateService)
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var currencyName = await CurrencyRateService.GetCurrenciesAsync().ConfigureAwait(false);
+        var currencyName = await CurrencyRateService.GetCurrenciesAsync()
+            .ConfigureAwait(false);
 
         var getRatesResponse = Map.FromEntity(currencyName);
 
-        await SendOkAsync(getRatesResponse, ct).ConfigureAwait(false);
+        await SendOkAsync(getRatesResponse, ct)
+            .ConfigureAwait(false);
     }
 }

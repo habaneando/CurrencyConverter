@@ -13,8 +13,12 @@ public static class DI
         services.AddResilienceRefitClient<IGetRatesByCurrencyService>(currencyApiBaseAddress);
 
         services.AddResilienceRefitClient<IGetRatesService>(currencyApiBaseAddress);
-       
+
+        services.AddResilienceRefitClient<IGetRatesByPeriodService>(currencyApiBaseAddress);
+
         services.AddSingleton<ICurrencyCodeValidator, CurrencyCodeValidator>();
+
+        services.AddSingleton<IDateValidator, DateValidator>();
 
         return services;
     }

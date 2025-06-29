@@ -1,3 +1,5 @@
-﻿internal interface ICurrencyCodeValidator
+﻿namespace CurrencyConverter.Api;
+
+internal interface ICurrencyCodeValidator
 {
 }

@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Currency\GetHistoricalExchangeRates\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CurrencyConverter.Application\CurrencyConverter.Application.csproj" />
     <ProjectReference Include="..\CurrencyConverter.Infrastructure\CurrencyConverter.Infrastructure.csproj" />
   </ItemGroup>

@@ -12,12 +12,17 @@ internal class ConvertCurrencyEndpoint(IConvertCurrencyService CurrencyRateServi
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(ConvertCurrencyRequest req, CancellationToken ct)
+    public override async Task HandleAsync(ConvertCurrencyRequest convertCurrencyRequest, CancellationToken ct)
     {
-        var currentRate = await CurrencyRateService.ConvertCurrencyAsync(req.currency, req.symbols, req.amount).ConfigureAwait(false);
+        var currentRate = await CurrencyRateService.ConvertCurrencyAsync(
+            convertCurrencyRequest.currency,
+            convertCurrencyRequest.symbols,
+            convertCurrencyRequest.amount)
+            .ConfigureAwait(false);
 
         var getRatesResponse = Map.FromEntity(currentRate);
 
-        await SendOkAsync(getRatesResponse, ct).ConfigureAwait(false);
+        await SendOkAsync(getRatesResponse, ct)
+            .ConfigureAwait(false);
     }
 }
