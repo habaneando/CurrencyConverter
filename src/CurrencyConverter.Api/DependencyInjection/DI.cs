@@ -20,6 +20,10 @@ public static class DI
 
         services.AddSingleton<IDateValidator, DateValidator>();
 
+        services.AddSingleton<IExcludeCurrencyCodeProvider, ExcludeCurrencyCodeProvider>();
+
+        services.AddSingleton<IExcludeCurrencyCodeValidator, ExcludeCurrencyCodeValidator>();
+
         return services;
     }
 }

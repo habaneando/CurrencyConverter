@@ -1,8 +1,9 @@
-﻿using FastEndpoints;
+﻿using System.Net;
+using FastEndpoints;
 
 namespace CurrencyConverter.Api;
 
-internal class ConvertCurrencyEndpoint(IConvertCurrencyService CurrencyRateService) 
+internal class ConvertCurrencyEndpoint(IConvertCurrencyService CurrencyRateService, IExcludeCurrencyCodeValidator ExcludeCurrencyCodeValidator) 
     : Endpoint<ConvertCurrencyRequest, ConvertCurrencyResponse, ConvertCurrencyMapper>
 {
     public override void Configure()
@@ -14,6 +15,16 @@ internal class ConvertCurrencyEndpoint(IConvertCurrencyService CurrencyRateServi
 
     public override async Task HandleAsync(ConvertCurrencyRequest convertCurrencyRequest, CancellationToken ct)
     {
+        if (ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.currency) ||
+            ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.symbols))
+        {
+            AddError("Currency not allowed.");
+
+            await SendErrorsAsync((int)HttpStatusCode.BadRequest, ct);
+
+            return;
+        }
+
         var currentRate = await CurrencyRateService.ConvertCurrencyAsync(
             convertCurrencyRequest.currency,
             convertCurrencyRequest.symbols,
