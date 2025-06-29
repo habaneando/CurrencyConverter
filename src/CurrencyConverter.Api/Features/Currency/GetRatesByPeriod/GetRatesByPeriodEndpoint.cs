@@ -20,6 +20,12 @@ internal class GetRatesByPeriodEndpoint(IGetRatesByPeriodService GetRatesByPerio
             getRatesByPeriodRequest.currency)
             .ConfigureAwait(false);
 
+        var kvp = periodCurrentRates.Rates.ToList();
+
+        var kvpPaged = new PagedList<KeyValuePair<string, Dictionary<string, float>>>(kvp).GetItemsForPage(getRatesByPeriodRequest.page);
+
+        periodCurrentRates.Rates = new Dictionary<string, Dictionary<string, float>>(kvpPaged);
+
         var getRatesByPeriodResponse = Map.FromEntity(periodCurrentRates);
 
         await SendOkAsync(getRatesByPeriodResponse, ct)

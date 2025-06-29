@@ -1,7 +1,6 @@
 ﻿namespace CurrencyConverter.Api;
 
 public class PagedList<T> : IPagedList<T>
-    where T : class
 {
     public IList<T> Items { get; init; }
 
