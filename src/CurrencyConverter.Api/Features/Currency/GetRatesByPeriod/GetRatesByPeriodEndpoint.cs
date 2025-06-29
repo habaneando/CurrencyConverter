@@ -7,7 +7,7 @@ internal class GetRatesByPeriodEndpoint(IGetRatesByPeriodService GetRatesByPerio
 {
     public override void Configure()
     {
-        Get("/historical-rates/{from}/{to}/{currency}");
+        Get("/historical-rates/{from}/{to}/{currency}/{page}");
         Group<ApiV1Group>();
         AllowAnonymous();
     }
