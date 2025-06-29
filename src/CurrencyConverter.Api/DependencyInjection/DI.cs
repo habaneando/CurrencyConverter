@@ -24,6 +24,8 @@ public static class DI
 
         services.AddSingleton<IExcludeCurrencyCodeValidator, ExcludeCurrencyCodeValidator>();
 
+        services.AddSingleton<CurrencyFactoryProvider>();
+
         return services;
     }
 }
