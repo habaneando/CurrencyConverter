@@ -2,7 +2,9 @@
 
 namespace CurrencyConverter.Api;
 
-internal class GetRatesEndpoint(IGetRatesService CurrencyRateService) 
+internal class GetRatesEndpoint(
+    IGetRatesService CurrencyRateService,
+    CacheSettings CacheSettings) 
     : EndpointWithoutRequest<GetRatesResponse, GetRatesMapper>
 {
     public override void Configure()
@@ -10,6 +12,8 @@ internal class GetRatesEndpoint(IGetRatesService CurrencyRateService)
         Get("/rates");
         Group<ApiV1Group>();
         AllowAnonymous();
+        ResponseCache(CacheSettings.CacheDurationInSeconds);
+        Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
     }
 
     public override async Task HandleAsync(CancellationToken ct)

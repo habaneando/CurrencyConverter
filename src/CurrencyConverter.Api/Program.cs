@@ -6,7 +6,8 @@ using FastEndpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddFastEndpoints();
+builder.Services.AddFastEndpoints()
+    .AddResponseCaching();
 
 builder.Services.AddOpenApi();
 
@@ -16,9 +17,11 @@ builder.Services.AddApplication();
 
 builder.Services.AddInfrastructure("");
 
-builder.Services.AddApi();  
+builder.Services.AddApi();
 
 var app = builder.Build();
+
+app.UseResponseCaching();
 
 if (app.Environment.IsDevelopment())
 {
@@ -28,7 +31,7 @@ if (app.Environment.IsDevelopment())
 
     app.AddScalar();
 
-    app.AddReDoc(); 
+    app.AddReDoc();
 }
 
 app.UseHttpsRedirection();

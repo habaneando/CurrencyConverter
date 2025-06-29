@@ -26,6 +26,8 @@ public static class DI
 
         services.AddSingleton<CurrencyFactoryProvider>();
 
+        services.AddSingleton<CacheSettings>();
+
         return services;
     }
 }

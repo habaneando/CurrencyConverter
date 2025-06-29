@@ -2,7 +2,9 @@
 
 namespace CurrencyConverter.Api;
 
-internal class GetRatesByPeriodEndpoint(IGetRatesByPeriodService GetRatesByPeriodService)
+internal class GetRatesByPeriodEndpoint(
+    IGetRatesByPeriodService GetRatesByPeriodService,
+    CacheSettings CacheSettings)
     : Endpoint<GetRatesByPeriodRequest, GetRatesByPeriodResponse, GetRatesByPeriodMapper>
 {
     public override void Configure()
@@ -10,6 +12,8 @@ internal class GetRatesByPeriodEndpoint(IGetRatesByPeriodService GetRatesByPerio
         Get("/historical-rates/{from}/{to}/{currency}/{page}");
         Group<ApiV1Group>();
         AllowAnonymous();
+        ResponseCache(CacheSettings.CacheDurationInSeconds);
+        Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
     }
 
     public override async Task HandleAsync(GetRatesByPeriodRequest getRatesByPeriodRequest, CancellationToken ct)
