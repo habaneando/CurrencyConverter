@@ -28,6 +28,10 @@ public static class DI
 
         services.AddSingleton<CacheSettings>();
 
+        services.AddSingleton<IAuthenticationService, AuthenticationService>();
+
+        services.AddSingleton<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
+
         return services;
     }
 }

@@ -3,21 +3,22 @@ using CurrencyConverter.Application;
 using CurrencyConverter.Domain;
 using CurrencyConverter.Infrastructure;
 using FastEndpoints;
+using FastEndpoints.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddFastEndpoints()
+builder.Services
+    .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens") 
+    .AddAuthorization()
+    .AddFastEndpoints()
     .AddResponseCaching();
 
-builder.Services.AddOpenApi();
-
-builder.Services.AddDomain();
-
-builder.Services.AddApplication();
-
-builder.Services.AddInfrastructure("");
-
-builder.Services.AddApi();
+builder.Services
+    .AddOpenApi()
+    .AddDomain()
+    .AddApplication()
+    .AddInfrastructure()
+    .AddApi();
 
 var app = builder.Build();
 
@@ -36,6 +37,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseFastEndpoints();
+app.UseAuthentication()
+   .UseAuthorization()
+   .UseFastEndpoints();
 
-await app.RunAsync().ConfigureAwait(false);
+await app.RunAsync()
+    .ConfigureAwait(false);
