@@ -23,11 +23,7 @@ internal class ConvertCurrencyEndpoint(
         if (ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.currency) ||
             ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.symbols))
         {
-            AddError("Currency not allowed.");
-
-            await SendErrorsAsync((int)HttpStatusCode.BadRequest, ct);
-
-            return;
+            ThrowError("Currency not allowed.");
         }
 
         var currentRate = await CurrencyRateService.ConvertCurrencyAsync(

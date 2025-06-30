@@ -15,18 +15,36 @@ public class UserLoginEndpoint(
 
     public override async Task HandleAsync(UserLoginRequest userLoginRequest, CancellationToken ct)
     {
-        if (await AuthenticationService.AuthenticateAsync(
-            userLoginRequest.Username,
-            userLoginRequest.Password,
-            ct) is not null)
+        var user = await AuthenticationService
+            .AuthenticateAsync(userLoginRequest.Username, userLoginRequest.Password, ct)
+            .ConfigureAwait(false);
+
+        if (user is null)
         {
-            await SendAsync(
-                JwtTokenGeneratorService.Generate(
-                    userLoginRequest.Username,
-                    userLoginRequest.Password,
-                    ct));
-        }
-        else
             ThrowError("The supplied credentials are invalid!");
+        }
+
+        var claims = await AuthenticationService
+            .GetUserClaimsAsync(user.Id, ct)
+            .ConfigureAwait(false);
+
+        var token = await JwtTokenGeneratorService.Generate(
+            DateTime.UtcNow.AddHours(24),
+            "your-issuer",
+            "your-audience",
+            "your-256-bit-secret-key",
+            claims,
+            ct)
+            .ConfigureAwait(false);
+
+        await SendAsync(
+            new
+            {
+                Token = token,
+                UserId = user.Id,
+                Username = user.Username,
+                Roles = user.Roles
+            })
+            .ConfigureAwait(false);
     }
 }
