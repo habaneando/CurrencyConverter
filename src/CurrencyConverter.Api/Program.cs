@@ -8,17 +8,17 @@ using FastEndpoints.Security;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens") 
-    .AddAuthorizationPolicies()
-    .AddFastEndpoints()
-    .AddResponseCaching();
-
-builder.Services
     .AddOpenApi()
     .AddDomain()
     .AddApplication()
     .AddInfrastructure()
     .AddApi();
+
+builder.Services
+    .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens") 
+    .AddAuthorizationPolicies()
+    .AddFastEndpoints()
+    .AddResponseCaching();
 
 var app = builder.Build();
 

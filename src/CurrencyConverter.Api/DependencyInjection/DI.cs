@@ -32,6 +32,8 @@ public static class DI
 
         services.AddSingleton<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
 
+        services.AddScoped<IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
+
         return services;
     }
 }
