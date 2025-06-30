@@ -37,12 +37,18 @@ if (app.Environment.IsDevelopment())
     app.AddReDoc();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAntiforgeryFE()
+app.UseHttpsRedirection()
+   .UseAntiforgeryFE()
    .UseAuthentication()
-   .UseAuthorization()
-   .UseFastEndpoints();
+   .UseFastEndpoints(c =>
+   {
+       c.Endpoints.Configurator = ep =>
+       {
+           ep.PreProcessors(Order.Before, typeof(RequestLogger<>));
+           ep.PostProcessors(Order.After, typeof(ResponseLogger<,>)); 
+       };
+   });
+   
 
 await app.RunAsync()
     .ConfigureAwait(false);

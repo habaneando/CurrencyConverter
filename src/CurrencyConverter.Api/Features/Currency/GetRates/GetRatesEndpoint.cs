@@ -18,7 +18,8 @@ internal class GetRatesEndpoint(
 
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
 
-        Policies(CurrencyPolicy.Reader);
+        AllowAnonymous();
+        //Policies(CurrencyPolicy.Reader);
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
 
