@@ -11,9 +11,9 @@ internal class GetRatesByPeriodEndpoint(
     {
         Get("/historical-rates/{from}/{to}/{currency}/{page}");
         Group<ApiVersion1Group>();
-        AllowAnonymous();
         ResponseCache(CacheSettings.CacheDurationInSeconds);
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
+        Policies(CurrencyPolicy.Reader);
     }
 
     public override async Task HandleAsync(GetRatesByPeriodRequest getRatesByPeriodRequest, CancellationToken ct)

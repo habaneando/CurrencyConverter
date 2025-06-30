@@ -11,9 +11,9 @@ internal class GetCurrenciesEndpoint(
     {
         Get("/currencies");
         Group<ApiVersion1Group>();
-        AllowAnonymous();
         ResponseCache(CacheSettings.CacheDurationInSeconds);
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
+        Policies(CurrencyPolicy.Reader);
     }
 
     public override async Task HandleAsync(CancellationToken ct)

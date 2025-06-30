@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens") 
-    .AddAuthorization()
+    .AddAuthorizationPolicies()
     .AddFastEndpoints()
     .AddResponseCaching();
 

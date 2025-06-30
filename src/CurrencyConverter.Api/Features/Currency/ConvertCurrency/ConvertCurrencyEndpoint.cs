@@ -13,9 +13,9 @@ internal class ConvertCurrencyEndpoint(
     {
         Get("/exchange-rates/{currency}/{symbols}/{amount}");
         Group<ApiVersion1Group>();
-        AllowAnonymous();
         ResponseCache(CacheSettings.CacheDurationInSeconds);
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
+        Policies(CurrencyPolicy.Converter);
     }
 
     public override async Task HandleAsync(ConvertCurrencyRequest convertCurrencyRequest, CancellationToken ct)
