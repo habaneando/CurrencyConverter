@@ -22,6 +22,8 @@ internal class ConvertCurrencyEndpoint(
         Policies(CurrencyPolicy.Converter);
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
+
+        EnableAntiforgery();
     }
 
     public override async Task HandleAsync(ConvertCurrencyRequest convertCurrencyRequest, CancellationToken ct)

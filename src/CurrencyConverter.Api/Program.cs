@@ -19,6 +19,7 @@ builder.Services
     .AddAuthorizationPolicies()
     .AddThrottling()
     .AddFastEndpoints()
+    .AddAntiforgery()
     .AddResponseCaching();
 
 var app = builder.Build();
@@ -38,7 +39,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication()
+app.UseAntiforgeryFE()
+   .UseAuthentication()
    .UseAuthorization()
    .UseFastEndpoints();
 

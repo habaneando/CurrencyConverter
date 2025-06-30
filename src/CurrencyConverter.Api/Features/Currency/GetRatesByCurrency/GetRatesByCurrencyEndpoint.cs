@@ -21,6 +21,8 @@ internal class GetRatesByCurrencyEndpoint(
         Policies(CurrencyPolicy.Reader);
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
+
+        EnableAntiforgery();
     }
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest getRatesByCurrencyRequest, CancellationToken ct)

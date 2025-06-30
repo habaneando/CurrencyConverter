@@ -21,6 +21,8 @@ internal class GetCurrenciesEndpoint(
         Policies(CurrencyPolicy.Reader);
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
+
+        EnableAntiforgery();
     }
 
     public override async Task HandleAsync(CancellationToken ct)
