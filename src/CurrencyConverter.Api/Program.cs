@@ -17,7 +17,7 @@ builder.Services
 builder.Services
     .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens") 
     .AddAuthorizationPolicies()
-    .AddDefaultRateLimiter()
+    .AddThrottling()
     .AddFastEndpoints()
     .AddResponseCaching();
 
