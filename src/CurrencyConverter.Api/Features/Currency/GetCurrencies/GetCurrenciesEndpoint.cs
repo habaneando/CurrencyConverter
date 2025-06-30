@@ -11,10 +11,15 @@ internal class GetCurrenciesEndpoint(
     public override void Configure()
     {
         Get("/currencies");
+
         Group<ApiVersion1Group>();
+
         ResponseCache(CacheSettings.CacheDurationInSeconds);
+
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
+
         Policies(CurrencyPolicy.Reader);
+
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
     }
 

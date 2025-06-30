@@ -12,10 +12,15 @@ internal class ConvertCurrencyEndpoint(
     public override void Configure()
     {
         Get("/exchange-rates/{currency}/{symbols}/{amount}");
+
         Group<ApiVersion1Group>();
+
         ResponseCache(CacheSettings.CacheDurationInSeconds);
+
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
+
         Policies(CurrencyPolicy.Converter);
+
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
     }
 

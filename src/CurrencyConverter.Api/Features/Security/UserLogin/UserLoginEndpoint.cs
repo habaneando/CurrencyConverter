@@ -11,7 +11,9 @@ public class UserLoginEndpoint(
     public override void Configure()
     {
         Post("/login");
+
         AllowAnonymous();
+
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
     }
 
