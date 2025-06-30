@@ -1,6 +1,6 @@
 ﻿namespace CurrencyConverter.Api;
 
-public class AuthorizationPolicyProvider : IAuthorizationPolicyProvider
+public class MockAuthorizationPolicyProvider : IAuthorizationPolicyProvider
 {
     public List<AuthorizationPolicy> GetPolicies() => [
         new AuthorizationPolicy(
@@ -8,22 +8,22 @@ public class AuthorizationPolicyProvider : IAuthorizationPolicyProvider
             policy =>
             {
                 policy.RequireAuthenticatedUser()
-                    .RequireRole(Role.Admin, Role.Manager)
+                    .RequireRole(Role.Admin.ToString(), Role.Manager.ToString())
                     .RequireClaim(
                         "Permission",
                         new List<string>
                         {
-                            Permission.ViewCurrencies,
-                            Permission.ViewRates,
-                            Permission.ConvertCurrency
+                            Permission.ViewCurrencies.ToString(),
+                            Permission.ViewRates.ToString(),
+                            Permission.ConvertCurrency.ToString()
                         })
                     .RequireClaim(
                         "Scope",
                         new List<string>
                         {
-                            Scope.Read,
-                            Scope.Write,
-                            Scope.Delete
+                            Scope.Read.ToString(),
+                            Scope.Write.ToString(),
+                            Scope.Delete.ToString()
                         });
             }),
         new AuthorizationPolicy(
@@ -31,19 +31,19 @@ public class AuthorizationPolicyProvider : IAuthorizationPolicyProvider
             policy =>
             {
                 policy.RequireAuthenticatedUser()
-                    .RequireRole(Role.Admin, Role.Manager, Role.User)
+                    .RequireRole(Role.Admin.ToString(), Role.Manager.ToString(), Role.User.ToString())
                     .RequireClaim(
                         "Permission",
                         new List<string>
                         {
-                            Permission.ViewCurrencies,
-                            Permission.ViewRates
+                            Permission.ViewCurrencies.ToString(),
+                            Permission.ViewRates.ToString()
                         })
                     .RequireClaim(
                         "Scope",
                         new List<string>
                         {
-                            Scope.Read
+                            Scope.Read.ToString()
                         });
             })
         ];

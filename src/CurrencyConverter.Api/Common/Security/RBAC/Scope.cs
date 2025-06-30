@@ -1,8 +1,8 @@
 ﻿namespace CurrencyConverter.Api;
 
-public static class Scope
+public enum Scope
 {
-    public const string Read = "Read";
-    public const string Write = "Write";
-    public const string Delete = "Delete";
+    Read,
+    Write,
+    Delete
 }

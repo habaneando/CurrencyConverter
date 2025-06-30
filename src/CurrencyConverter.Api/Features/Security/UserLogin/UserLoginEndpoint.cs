@@ -15,10 +15,10 @@ public class UserLoginEndpoint(
 
     public override async Task HandleAsync(UserLoginRequest userLoginRequest, CancellationToken ct)
     {
-        if (await AuthenticationService.CredentialsAreValid(
+        if (await AuthenticationService.AuthenticateAsync(
             userLoginRequest.Username,
             userLoginRequest.Password,
-            ct))
+            ct) is not null)
         {
             await SendAsync(
                 JwtTokenGeneratorService.Generate(

@@ -28,11 +28,11 @@ public static class DI
 
         services.AddSingleton<CacheSettings>();
 
-        services.AddSingleton<IAuthenticationService, AuthenticationService>();
+        services.AddSingleton<IAuthenticationService, MockAuthenticationService>();
 
-        services.AddSingleton<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
+        services.AddSingleton<IJwtTokenGeneratorService, MockJwtTokenGeneratorService>();
 
-        services.AddScoped<IAuthorizationPolicyProvider, AuthorizationPolicyProvider>();
+        services.AddScoped<IAuthorizationPolicyProvider, MockAuthorizationPolicyProvider>();
 
         return services;
     }

@@ -1,8 +1,8 @@
 ﻿namespace CurrencyConverter.Api;
 
-public static class Role
+public enum Role
 {
-    public const string Admin = "Admin";
-    public const string Manager = "Manager";
-    public const string User = "User";
+    Admin,
+    Manager,
+    User
 }
