@@ -4,7 +4,8 @@ namespace CurrencyConverter.Api;
 
 internal class GetCurrenciesEndpoint(
     IGetCurrenciesService CurrencyRateService,
-    CacheSettings CacheSettings) 
+    CacheSettings CacheSettings,
+    ThrottleSettings ThrottlingSettings) 
     : EndpointWithoutRequest<GetCurrenciesResponse, GetCurrenciesMapper>
 {
     public override void Configure()
@@ -14,6 +15,7 @@ internal class GetCurrenciesEndpoint(
         ResponseCache(CacheSettings.CacheDurationInSeconds);
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
         Policies(CurrencyPolicy.Reader);
+        Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
     }
 
     public override async Task HandleAsync(CancellationToken ct)

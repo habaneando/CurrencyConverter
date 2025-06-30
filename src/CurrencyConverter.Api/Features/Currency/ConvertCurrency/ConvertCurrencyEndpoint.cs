@@ -1,12 +1,12 @@
-﻿using System.Net;
-using FastEndpoints;
+﻿using FastEndpoints;
 
 namespace CurrencyConverter.Api;
 
 internal class ConvertCurrencyEndpoint(
     IConvertCurrencyService CurrencyRateService,
     IExcludeCurrencyCodeValidator ExcludeCurrencyCodeValidator,
-    CacheSettings CacheSettings) 
+    CacheSettings CacheSettings,
+    ThrottleSettings ThrottlingSettings) 
     : Endpoint<ConvertCurrencyRequest, ConvertCurrencyResponse, ConvertCurrencyMapper>
 {
     public override void Configure()
@@ -16,6 +16,7 @@ internal class ConvertCurrencyEndpoint(
         ResponseCache(CacheSettings.CacheDurationInSeconds);
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
         Policies(CurrencyPolicy.Converter);
+        Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
     }
 
     public override async Task HandleAsync(ConvertCurrencyRequest convertCurrencyRequest, CancellationToken ct)

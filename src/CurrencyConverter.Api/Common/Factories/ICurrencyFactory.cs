@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public interface ICurrencyFactory
 {

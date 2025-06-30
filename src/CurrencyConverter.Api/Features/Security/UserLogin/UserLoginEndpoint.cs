@@ -4,13 +4,15 @@ namespace CurrencyConverter.Api;
 
 public class UserLoginEndpoint(
     IAuthenticationService AuthenticationService,
-    IJwtTokenGeneratorService JwtTokenGeneratorService)
+    IJwtTokenGeneratorService JwtTokenGeneratorService,
+    ThrottleSettings ThrottlingSettings)
     : Endpoint<UserLoginRequest>
 {
     public override void Configure()
     {
         Post("/login");
         AllowAnonymous();
+        Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
     }
 
     public override async Task HandleAsync(UserLoginRequest userLoginRequest, CancellationToken ct)

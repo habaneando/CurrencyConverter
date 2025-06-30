@@ -28,6 +28,8 @@ public static class DI
 
         services.AddSingleton<CacheSettings>();
 
+        services.AddSingleton<ThrottleSettings>();
+
         services.AddSingleton<IAuthenticationService, MockAuthenticationService>();
 
         services.AddSingleton<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
