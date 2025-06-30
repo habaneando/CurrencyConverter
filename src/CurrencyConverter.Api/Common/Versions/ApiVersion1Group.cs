@@ -2,9 +2,9 @@
 
 namespace CurrencyConverter.Api;
 
-public sealed class ApiV1Group : Group
+public sealed class ApiVersion1Group : Group
 {
-    public ApiV1Group()
+    public ApiVersion1Group()
     {
         Configure("api/v1", ep => { });
     }

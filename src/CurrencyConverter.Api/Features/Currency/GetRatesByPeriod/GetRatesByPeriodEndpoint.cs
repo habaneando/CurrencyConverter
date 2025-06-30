@@ -10,7 +10,7 @@ internal class GetRatesByPeriodEndpoint(
     public override void Configure()
     {
         Get("/historical-rates/{from}/{to}/{currency}/{page}");
-        Group<ApiV1Group>();
+        Group<ApiVersion1Group>();
         AllowAnonymous();
         ResponseCache(CacheSettings.CacheDurationInSeconds);
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));

@@ -10,7 +10,7 @@ internal class GetRatesByCurrencyEndpoint(
     public override void Configure()
     {
         Get("/rates/{currency}");
-        Group<ApiV1Group>();
+        Group<ApiVersion1Group>();
         AllowAnonymous();
         ResponseCache(CacheSettings.CacheDurationInSeconds);
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
