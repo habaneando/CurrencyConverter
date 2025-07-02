@@ -14,7 +14,7 @@ public static class AddOpenTelemetryExtensions
 
         var serviceVersion = "1.0.0";
 
-        var outputUrl = new Uri("4317");
+        var outputUrl = new Uri("http://localhost:4317");
         //Add environment variable OTEL_EXPORTER_OTLP_ENDPOINT
         //add OTEL_EXPORTER_OTLP_ENDPOINT to appsettings.json
 
