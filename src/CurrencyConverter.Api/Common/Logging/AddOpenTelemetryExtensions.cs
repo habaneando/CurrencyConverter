@@ -41,7 +41,18 @@ public static class AddOpenTelemetryExtensions
                         options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
                     });
             })
-            .WithMetrics(metrics => { })
+            .WithMetrics(metrics =>
+            {
+                metrics
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddNpgsqlInstrumentation()
+                    .AddOtlpExporter(options =>
+                    {
+                        options.Endpoint = outputUrl;
+                        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+                    });
+            })
             .WithLogging(logging =>
             {
                 logging.AddProcessor<CustomLogProcessor>();
