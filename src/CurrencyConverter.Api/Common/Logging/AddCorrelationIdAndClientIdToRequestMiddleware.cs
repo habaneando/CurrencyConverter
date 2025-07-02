@@ -3,23 +3,16 @@ using Serilog.Context;
 
 namespace CurrencyConverter.Api;
 
-public class AddCorrelationIdAndClientIdToRequestMiddleware
+public class AddCorrelationIdAndClientIdToRequestMiddleware(
+    RequestDelegate Next,
+    ILogger<AddCorrelationIdAndClientIdToRequestMiddleware> Logger,
+    ILogFormatter LogFormatter,
+    IExceptionFormatter ExceptionFormatter,
+    IProblemDetailsFactory ProblemDetailsFactory)
 {
     private const string CorrelationIdHeaderName = "X-Correlation-Id";
 
     private const string ClientIdHeaderName = "X-Client-Id";
-
-    private readonly RequestDelegate _next;
-
-    ILogger<AddCorrelationIdAndClientIdToRequestMiddleware> _logger;
-
-    public AddCorrelationIdAndClientIdToRequestMiddleware(
-        RequestDelegate next,
-        ILogger<AddCorrelationIdAndClientIdToRequestMiddleware> logger)
-    {
-        _next = next;
-        _logger = logger;
-    }
 
     public Task Invoke(HttpContext context)
     {
@@ -32,7 +25,13 @@ public class AddCorrelationIdAndClientIdToRequestMiddleware
             using (LogContext.PushProperty("CorrelationId", correlationId))
             using (LogContext.PushProperty("ClientId", clientId))
             {
-                return _next.Invoke(context);
+                var result = Next.Invoke(context);
+
+                var logFormatted = LogFormatter.Format(context);
+
+                Logger.LogInformation(logFormatted);
+
+                return result;
             }
         }
         catch (Exception ex)
@@ -40,17 +39,16 @@ public class AddCorrelationIdAndClientIdToRequestMiddleware
             using (LogContext.PushProperty("CorrelationId", correlationId))
             using (LogContext.PushProperty("ClientId", clientId))
             {
-                _logger.LogError(ex, "Exception in {Method} {Path}, StatusCode: {StatusCode}, ResponseTime: {ResponseTimeMs:F2}ms");
+                var exceptionFormatted = ExceptionFormatter.Format(ex);
+                
+                Logger.LogError(ex, exceptionFormatted);
             }
 
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            return context.Response.WriteAsJsonAsync(
-                new
-                {
-                    Error = "An unexpected error occurred",
-                    CorrelationId = correlationId
-                });
+            var problemDetails = ProblemDetailsFactory.Create(ex);
+
+            return context.Response.WriteAsJsonAsync(problemDetails);
         }
     }
 
@@ -62,10 +60,6 @@ public class AddCorrelationIdAndClientIdToRequestMiddleware
         return correlationId.FirstOrDefault() ?? context.TraceIdentifier ?? "Unknown";
     }
 
-    private  string GetClientId(HttpContext context)
-    {
-        var clientId = context.User?.FindFirst(ClientIdHeaderName)?.Value ?? "Unknown";
-
-        return clientId;
-    }
+    private  string GetClientId(HttpContext context) =>
+        context.User?.FindFirst(ClientIdHeaderName)?.Value ?? "Unknown";
 }

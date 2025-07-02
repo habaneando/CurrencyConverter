@@ -36,6 +36,12 @@ public static class DI
 
         services.AddScoped<IAuthorizationPolicyProvider, MockAuthorizationPolicyProvider>();
 
+        services.AddSingleton<ILogFormatter, LogFormatter>();
+
+        services.AddSingleton<IExceptionFormatter, ExceptionFormatter>();
+
+        services.AddSingleton<IProblemDetailsFactory, ProblemDetailsFactory>();
+
         return services;
     }
 }
