@@ -1,12 +1,8 @@
 ﻿using Npgsql;
-using OpenTelemetry;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using OpenTelemetry.Instrumentation.AspNetCore;
-using OpenTelemetry.Instrumentation.EntityFrameworkCore;
-using OpenTelemetry.Instrumentation.Http;
 
 namespace CurrencyConverter.Api;
 
@@ -46,7 +42,15 @@ public static class AddOpenTelemetryExtensions
                     });
             })
             .WithMetrics(metrics => { })
-            .WithLogging(logs => { });
+            .WithLogging(logging =>
+            {
+                logging.AddProcessor<CustomLogProcessor>();
+
+                logging.AddOtlpExporter(opt =>
+                {
+                    opt.Endpoint = outputUrl;
+                });
+            });
 
         return services;
     }
