@@ -4,6 +4,7 @@ using CurrencyConverter.Domain;
 using CurrencyConverter.Infrastructure;
 using FastEndpoints;
 using FastEndpoints.Security;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services
     .AddAntiforgery()
     .AddResponseCaching()
     .AddTelemetry();
+
+builder.AddSerilog();
 
 var app = builder.Build();
 
@@ -48,8 +51,9 @@ app.UseHttpsRedirection()
            ep.PreProcessors(Order.Before, typeof(RequestLogger<>));
            ep.PostProcessors(Order.After, typeof(ResponseLogger<,>)); 
        };
-   });
-   
+   })
+   .UseSerilogRequestLogging()
+   .AddCorrelationIdToRequest();
 
 await app.RunAsync()
     .ConfigureAwait(false);

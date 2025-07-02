@@ -22,6 +22,10 @@
     <PackageVersion Include="Refit" Version="8.0.0" />
     <PackageVersion Include="Refit.HttpClientFactory" Version="8.0.0" />
     <PackageVersion Include="Scalar.AspNetCore" Version="2.5.3" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.1-dev-02317" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.1-dev-00953" />
+    <PackageVersion Include="Serilog.Sinks.Seq" Version="9.0.0" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.12.0.118525" />
     <PackageVersion Include="Swashbuckle.AspNetCore.ReDoc" Version="9.0.1" />
