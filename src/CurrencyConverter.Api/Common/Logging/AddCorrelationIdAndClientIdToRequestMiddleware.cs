@@ -14,6 +14,12 @@ public class AddCorrelationIdAndClientIdToRequestMiddleware(
 
     private const string ClientIdHeaderName = "X-Client-Id";
 
+    /// <summary>
+    /// 5341 default port for Seq UI
+    /// docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public Task Invoke(HttpContext context)
     {
         string correlationId = GetCorrelationId(context);
