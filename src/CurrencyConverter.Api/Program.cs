@@ -15,12 +15,13 @@ builder.Services
     .AddApi();
 
 builder.Services
-    .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens") 
+    .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens")
     .AddAuthorizationPolicies()
     .AddThrottling()
     .AddFastEndpoints()
     .AddAntiforgery()
-    .AddResponseCaching();
+    .AddResponseCaching()
+    .AddTelemetry();
 
 var app = builder.Build();
 
