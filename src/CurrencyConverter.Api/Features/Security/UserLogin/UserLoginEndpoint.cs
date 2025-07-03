@@ -4,6 +4,7 @@ namespace CurrencyConverter.Api;
 
 public class UserLoginEndpoint(
     IAuthenticationService AuthenticationService,
+    IAuthorizationService AuthorizationService,
     IJwtTokenGeneratorService JwtTokenGeneratorService,
     ThrottleSettings ThrottlingSettings)
     : Endpoint<UserLoginRequest, UserLoginResponse>
@@ -24,7 +25,10 @@ public class UserLoginEndpoint(
     public override async Task HandleAsync(UserLoginRequest userLoginRequest, CancellationToken ct)
     {
         var user = await AuthenticationService
-            .AuthenticateAsync(userLoginRequest.Username, userLoginRequest.Password, ct)
+            .AuthenticateAsync(
+                userLoginRequest.Username,
+                userLoginRequest.Password,
+                ct)
             .ConfigureAwait(false);
 
         if (user is null)
@@ -32,7 +36,7 @@ public class UserLoginEndpoint(
             ThrowError("The supplied credentials are invalid!");
         }
 
-        var claims = await AuthenticationService
+        var claims = await AuthorizationService
             .GetUserClaimsAsync(user.Id, ct)
             .ConfigureAwait(false);
 

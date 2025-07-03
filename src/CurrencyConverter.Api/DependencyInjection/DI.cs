@@ -32,6 +32,8 @@ public static class DI
 
         services.AddSingleton<IAuthenticationService, MockAuthenticationService>();
 
+        services.AddSingleton<IAuthorizationService, MockAuthorizationService>();
+
         services.AddSingleton<IJwtTokenGeneratorService, MockJwtTokenGeneratorService>();
 
         services.AddScoped<IAuthorizationPolicyProvider, MockAuthorizationPolicyProvider>();
