@@ -1,7 +1,4 @@
-﻿using CurrencyConverter.Domain;
-using FastEndpoints;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 internal sealed class GetRatesByPeriodMapper : ResponseMapper<GetRatesByPeriodResponse, PeriodCurrencyRates>
 {

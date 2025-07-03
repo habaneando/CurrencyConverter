@@ -1,8 +1,4 @@
-﻿using System.Security.Claims;
-using FastEndpoints.Security;
-using Microsoft.IdentityModel.Tokens;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public class JwtTokenGeneratorService : IJwtTokenGeneratorService
 {

@@ -1,7 +1,4 @@
-﻿using FastEndpoints;
-using FluentValidation;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 internal sealed class ConvertCurrencyValidator : Validator<ConvertCurrencyRequest>
 {

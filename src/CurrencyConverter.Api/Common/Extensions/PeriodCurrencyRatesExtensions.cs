@@ -1,6 +1,4 @@
-﻿using CurrencyConverter.Domain;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 internal static class PeriodCurrencyRatesExtensions
 {

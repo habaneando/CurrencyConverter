@@ -1,8 +1,4 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public static class AuthenticationExtensions
 {

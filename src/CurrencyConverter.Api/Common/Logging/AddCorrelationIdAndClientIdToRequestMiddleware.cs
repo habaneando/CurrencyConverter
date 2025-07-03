@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Primitives;
-using Serilog.Context;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public class AddCorrelationIdAndClientIdToRequestMiddleware(
     RequestDelegate Next,

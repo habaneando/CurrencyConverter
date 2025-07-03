@@ -1,10 +1,3 @@
-using CurrencyConverter.Api;
-using CurrencyConverter.Application;
-using CurrencyConverter.Domain;
-using CurrencyConverter.Infrastructure;
-using FastEndpoints;
-using Serilog;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services

@@ -1,10 +1,4 @@
-﻿using Npgsql;
-using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public static class OpenTelemetryExtensions
 {

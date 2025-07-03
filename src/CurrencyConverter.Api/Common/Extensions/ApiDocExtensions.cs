@@ -1,6 +1,4 @@
-﻿using Scalar.AspNetCore;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 internal static class ApiDocExtensions
 {

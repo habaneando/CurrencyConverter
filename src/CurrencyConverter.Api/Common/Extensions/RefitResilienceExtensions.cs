@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.Http.Resilience;
-using Polly;
-using Refit;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public static class RefitResilienceExtensions
 {

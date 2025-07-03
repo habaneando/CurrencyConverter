@@ -1,6 +1,4 @@
-﻿using FastEndpoints;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public sealed class ApiVersion1Group : Group
 {

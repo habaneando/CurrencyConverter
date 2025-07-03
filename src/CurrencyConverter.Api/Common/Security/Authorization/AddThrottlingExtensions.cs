@@ -1,7 +1,4 @@
-﻿using System.Threading.RateLimiting;
-using Microsoft.AspNetCore.RateLimiting;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public static class AddThrottlingExtensions
 {

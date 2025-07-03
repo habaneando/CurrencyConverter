@@ -1,7 +1,4 @@
-﻿using OpenTelemetry;
-using OpenTelemetry.Logs;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public class CustomLogProcessor : BaseProcessor<LogRecord>
 {

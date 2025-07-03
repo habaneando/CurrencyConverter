@@ -1,4 +1,5 @@
-﻿namespace CurrencyConverter.Domain;
+﻿
+namespace CurrencyConverter.Domain;
 
 public static class DI
 {

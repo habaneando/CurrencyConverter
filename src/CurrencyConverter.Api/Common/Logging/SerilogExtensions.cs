@@ -1,6 +1,4 @@
-﻿using Serilog;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public static class SerilogExtensions
 {

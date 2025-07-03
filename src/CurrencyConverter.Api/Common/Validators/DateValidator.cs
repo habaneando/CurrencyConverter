@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public class DateValidator : AbstractValidator<string>, IDateValidator
 {

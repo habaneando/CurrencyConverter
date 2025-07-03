@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <Compile Remove="C:\Users\marce\Source\Repos\CurrencyConverter\\GlobalUsings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Notification\" />
     <Folder Include="Logging\" />
     <Folder Include="EventHandling\" />

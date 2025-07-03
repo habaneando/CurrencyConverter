@@ -1,7 +1,4 @@
-﻿using System.Security.Cryptography;
-using Microsoft.IdentityModel.Tokens;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public static class RsaKeyGenerator
 {

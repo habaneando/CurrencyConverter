@@ -1,7 +1,4 @@
-﻿using CurrencyConverter.Domain;
-using FluentValidation;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public class CurrencyCodeValidator : AbstractValidator<string>, ICurrencyCodeValidator
 {

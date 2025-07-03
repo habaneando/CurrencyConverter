@@ -1,6 +1,4 @@
-﻿using FastEndpoints;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 internal class ConvertCurrencyEndpoint(
     IConvertCurrencyService CurrencyRateService,

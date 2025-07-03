@@ -1,7 +1,4 @@
-﻿using CurrencyConverter.Domain;
-using Refit;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public interface IGetRatesService : IRefitService
 {

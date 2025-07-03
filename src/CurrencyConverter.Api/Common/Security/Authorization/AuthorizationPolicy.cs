@@ -1,5 +1,3 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public record AuthorizationPolicy(string Name, Action<AuthorizationPolicyBuilder> ConfigurePolicy);

@@ -1,0 +1,34 @@
+﻿global using System.Globalization;
+global using System.Security.Claims;
+global using System.Security.Cryptography;
+global using System.Text;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using System.Threading.RateLimiting;
+global using CurrencyConverter.Api;
+global using CurrencyConverter.Application;
+global using CurrencyConverter.Domain;
+global using CurrencyConverter.Infrastructure;
+global using FastEndpoints;
+global using FastEndpoints.Security;
+global using FluentValidation;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.RateLimiting;
+global using Microsoft.Extensions.Http.Resilience;
+global using Microsoft.Extensions.Primitives;
+global using Microsoft.IdentityModel.Tokens;
+global using Npgsql;
+global using OpenTelemetry;
+global using OpenTelemetry.Logs;
+global using OpenTelemetry.Metrics;
+global using OpenTelemetry.Resources;
+global using OpenTelemetry.Trace;
+global using Polly;
+global using Refit;
+global using Scalar.AspNetCore;
+global using Serilog;
+global using Serilog.Context;
+
+global using ProblemDetails = FastEndpoints.ProblemDetails;
+

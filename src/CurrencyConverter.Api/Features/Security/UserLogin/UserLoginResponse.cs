@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Api;
 
 public record UserLoginResponse(
     string Token,
