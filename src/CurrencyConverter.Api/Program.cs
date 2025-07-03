@@ -3,7 +3,6 @@ using CurrencyConverter.Application;
 using CurrencyConverter.Domain;
 using CurrencyConverter.Infrastructure;
 using FastEndpoints;
-using FastEndpoints.Security;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +15,7 @@ builder.Services
     .AddApi();
 
 builder.Services
-    .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens")
+    .AddJwtAuthentication()
     .AddAuthorizationPolicies()
     .AddThrottling()
     .AddFastEndpoints()

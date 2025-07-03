@@ -32,7 +32,7 @@ public static class DI
 
         services.AddSingleton<IAuthenticationService, MockAuthenticationService>();
 
-        services.AddSingleton<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
+        services.AddSingleton<IJwtTokenGeneratorService, MockJwtTokenGeneratorService>();
 
         services.AddScoped<IAuthorizationPolicyProvider, MockAuthorizationPolicyProvider>();
 

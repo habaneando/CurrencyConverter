@@ -6,15 +6,19 @@ public class UserLoginEndpoint(
     IAuthenticationService AuthenticationService,
     IJwtTokenGeneratorService JwtTokenGeneratorService,
     ThrottleSettings ThrottlingSettings)
-    : Endpoint<UserLoginRequest>
+    : Endpoint<UserLoginRequest, UserLoginResponse>
 {
     public override void Configure()
     {
         Post("/login");
 
+        Group<ApiVersion1Group>();
+
         AllowAnonymous();
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
+
+        EnableAntiforgery();
     }
 
     public override async Task HandleAsync(UserLoginRequest userLoginRequest, CancellationToken ct)
@@ -34,21 +38,21 @@ public class UserLoginEndpoint(
 
         var token = await JwtTokenGeneratorService.Generate(
             DateTime.UtcNow.AddHours(24),
-            "your-issuer",
-            "your-audience",
-            "your-256-bit-secret-key",
+            "mock-issuer",
+            "mock-audience",
+            "mock-signingKey",
             claims,
             ct)
             .ConfigureAwait(false);
 
         await SendAsync(
-            new
-            {
-                Token = token,
-                UserId = user.Id,
-                Username = user.Username,
-                Roles = user.Roles
-            })
+            new UserLoginResponse(
+                Token: token,
+                UserId: user.Id,
+                Username: user.Username,
+                Roles: user.Roles,
+                Claims: claims
+            ))
             .ConfigureAwait(false);
     }
 }
