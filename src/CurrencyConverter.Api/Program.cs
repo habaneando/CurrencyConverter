@@ -1,4 +1,8 @@
+using GeneratedCode;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var sample = new SampleClass3();
 
 builder.Services
     .AddOpenApi()

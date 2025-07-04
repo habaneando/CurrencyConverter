@@ -1,5 +1,3 @@
-﻿global using System.Text;
-global using System.Text.Json;
-global using Microsoft.CodeAnalysis;
-global using Microsoft.CodeAnalysis.Text;
+﻿global using Microsoft.CodeAnalysis;
 global using System.Collections.Immutable;
+global using Microsoft.CodeAnalysis.CSharp.Syntax;

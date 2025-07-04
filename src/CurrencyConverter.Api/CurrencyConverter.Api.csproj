@@ -26,10 +26,16 @@
     <PackageReference Include="Serilog.Sinks.Seq" />
     <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
-    
   </ItemGroup>
 
+  <!--
+    OutputItemType="Analyzer": Indicates that the referenced project is a source generator, treated similarly to a Roslyn analyzer.
+    ReferenceOutputAssembly="false": Ensures the generator's DLL is not included in the consumer's output, as it is only needed at compile time.
+  -->
   <ItemGroup>
+    <ProjectReference Include="..\..\gen\Generator\Generator.csproj"
+                      OutputItemType ="Analyzer"
+                      ReferenceOutputAssembly="false"/>
     <ProjectReference Include="..\CurrencyConverter.Application\CurrencyConverter.Application.csproj" />
     <ProjectReference Include="..\CurrencyConverter.Infrastructure\CurrencyConverter.Infrastructure.csproj" />
   </ItemGroup>
