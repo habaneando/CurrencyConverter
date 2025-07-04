@@ -4,16 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-    <!--
-    EnforceExtendedAnalyzerRules: force the generation. pending to check if it is mandatory
-  -->
-    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Configuration\**" />
+    <EmbeddedResource Remove="Configuration\**" />
+    <None Remove="Configuration\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="C:\Users\marce\Source\Repos\CurrencyConverter\\GlobalUsings.cs" />
-    <Compile Remove="Configuration\ConfigurationGenerator.cs" />
-    <Compile Remove="Configuration\JsonFileInfo.cs" />
   </ItemGroup>
 
   <!--
@@ -26,9 +26,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configuration\" />
+    <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
 
 </Project>

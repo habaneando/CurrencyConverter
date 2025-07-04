@@ -2,7 +2,14 @@ using GeneratedCode;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var sample = new SampleClass3();
+//builder.ConfigureServices((context, services) =>
+//{
+//    var configuration = context.Configuration;
+
+//    builder.Services.ConfigureAppSettings(configuration);
+//});
+
+var sample = new SampleClass4();
 
 builder.Services
     .AddOpenApi()
@@ -23,6 +30,8 @@ builder.Services
 builder.AddSerilog();
 
 var app = builder.Build();
+
+//app.Services.ValidateConfiguration();
 
 app.UseResponseCaching();
 

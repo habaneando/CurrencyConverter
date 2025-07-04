@@ -40,4 +40,22 @@
     <ProjectReference Include="..\CurrencyConverter.Infrastructure\CurrencyConverter.Infrastructure.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <!-- Force the compiler to emit generated files to a Generated folder -->
+    <!-- By default, source generators produce code in-memory during compilation, and the generated files are not persisted
+    to disk or visible in the Solution Explorer. To make them visible, you need to enable it-->
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <!-- By default, generated files are written to the obj folder (e.g., obj/generated), which is typically excluded from
+    source control and not visible in the Solution Explorer. To control where the files are saved and make them part of the project structure -->
+    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+    <ReportAnalyzer>true</ReportAnalyzer>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- Exclude generated files from compilation -->
+    <Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+    <!-- Include generated files in Solution Explorer -->
+    <None Include="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+  </ItemGroup>
+  
 </Project>
