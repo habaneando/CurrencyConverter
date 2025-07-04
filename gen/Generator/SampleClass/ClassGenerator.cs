@@ -1,4 +1,6 @@
-﻿namespace Generator;
+﻿using System.Diagnostics;
+
+namespace Generator;
 
 [Generator]
 internal class ClassGenerator : IIncrementalGenerator
@@ -23,6 +25,8 @@ internal class ClassGenerator : IIncrementalGenerator
         Compilation compilation,
         ImmutableArray<ClassDeclarationSyntax> typeList)
     {
+
+        if(!Debugger.IsAttached) Debugger.Launch();
 
         if (false)
         { 
