@@ -23,6 +23,22 @@ internal class ClassGenerator : IIncrementalGenerator
         Compilation compilation,
         ImmutableArray<ClassDeclarationSyntax> typeList)
     {
+
+        if (false)
+        { 
+            // Example error reporting
+            var diagnosticDescriptor = new DiagnosticDescriptor(
+                id: "SG0001",
+                title: "Title Sample",
+                messageFormat: "Message Sample",
+                category: "Category",
+                defaultSeverity: DiagnosticSeverity.Info,
+                isEnabledByDefault: true);
+
+            context.ReportDiagnostic(
+                Diagnostic.Create(diagnosticDescriptor, Location.None));
+        }
+
         var sourceName = "SampleClass.g.cs";
 
         var source = @"
