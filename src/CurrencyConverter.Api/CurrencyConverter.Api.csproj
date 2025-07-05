@@ -49,13 +49,41 @@
     source control and not visible in the Solution Explorer. To control where the files are saved and make them part of the project structure -->
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
     <ReportAnalyzer>true</ReportAnalyzer>
+    <DesignTimeBuild>false</DesignTimeBuild>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <!-- Exclude generated files from compilation -->
-    <Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+    <Compile Remove="Generated/**" />
     <!-- Include generated files in Solution Explorer -->
-    <None Include="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+    <None Include="Generated/**" />
   </ItemGroup>
+
+  <Target Name="CleanGeneratedFolder" BeforeTargets="BeforeBuild">
+    <RemoveDir Directories="Generated" Condition="Exists('Generated')" />
+    <MakeDir Directories="Generated" />
+  </Target>
+
+  <Target Name="EnsureGeneratedFolderExists" BeforeTargets="BeforeBuild">
+    <MakeDir Directories="Generated" Condition="!Exists('Generated')" />
+  </Target>
+
+  <Target Name="CopyGeneratedFiles" AfterTargets="Build">
+    <ItemGroup>
+      <GeneratedFiles Include="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(GeneratedFiles)"
+          DestinationFolder="Generated/%(RecursiveDir)"
+          SkipUnchangedFiles="false" />
+  </Target>
+
+  <!--<Target Name="ForceCompleteGeneration" BeforeTargets="CoreCompile">
+    <RemoveDir Directories="Generated" Condition="Exists('Generated')" />
+    <MakeDir Directories="Generated" />
+  </Target>-->
   
+    <!--<PropertyGroup>
+      <DesignTimeBuild>false</DesignTimeBuild>z
+    </PropertyGroup>-->
 </Project>
