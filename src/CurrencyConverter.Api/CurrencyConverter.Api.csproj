@@ -60,7 +60,10 @@
   </ItemGroup>
 
   <Target Name="CleanGeneratedFolder" BeforeTargets="BeforeBuild">
+    <!-- Clean both the persistent Generated folder and the compiler output -->
     <RemoveDir Directories="Generated" Condition="Exists('Generated')" />
+    <RemoveDir Directories="$(IntermediateOutputPath)generated" Condition="Exists('$(IntermediateOutputPath)generated')" />
+    <RemoveDir Directories="obj\generated" Condition="Exists('obj\generated')" />
     <MakeDir Directories="Generated" />
   </Target>
 
@@ -82,8 +85,8 @@
     <RemoveDir Directories="Generated" Condition="Exists('Generated')" />
     <MakeDir Directories="Generated" />
   </Target>-->
-  
-    <!--<PropertyGroup>
+
+  <!--<PropertyGroup>
       <DesignTimeBuild>false</DesignTimeBuild>z
     </PropertyGroup>-->
 </Project>
