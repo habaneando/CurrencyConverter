@@ -1,6 +1,4 @@
-﻿using Refit;
-
-namespace CurrencyConverter.Application;
+﻿namespace CurrencyConverter.Application;
 
 public interface IGetCurrenciesService
 {

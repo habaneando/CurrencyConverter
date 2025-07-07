@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace CurrencyConverter.Application;
+﻿namespace CurrencyConverter.Application;
 
 public sealed record GetRatesResponse
 {

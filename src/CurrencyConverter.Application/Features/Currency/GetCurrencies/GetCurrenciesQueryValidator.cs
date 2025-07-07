@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CurrencyConverter.Application;
+﻿namespace CurrencyConverter.Application;
 
 public class GetCurrenciesQueryValidator: AbstractValidator<GetCurrenciesQuery>
 {
