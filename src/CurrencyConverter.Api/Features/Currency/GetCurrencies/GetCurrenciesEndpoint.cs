@@ -4,7 +4,7 @@ internal class GetCurrenciesEndpoint(
     IQueryHandler<GetCurrenciesQuery, GetCurrenciesResponse> Handler,
     CacheSettings CacheSettings,
     ThrottleSettings ThrottlingSettings) 
-    : EndpointWithoutRequest<GetCurrenciesResponse, GetCurrenciesMapper>
+    : EndpointWithoutRequest<BaseResponse, GetCurrenciesMapper>
 {
     public override void Configure()
     {
@@ -30,9 +30,9 @@ internal class GetCurrenciesEndpoint(
 
         var response = await Handler.Handle(query, ct);
 
-        var getRatesResponse = Map.FromEntity(response.Names);
+        var map = Map.FromEntity(response);
 
-        await SendOkAsync(getRatesResponse, ct)
+        await SendOkAsync(map, ct)
             .ConfigureAwait(false);
     }
 }

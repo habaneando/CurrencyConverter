@@ -1,10 +1,7 @@
 ﻿namespace CurrencyConverter.Api;
 
-internal sealed class GetCurrenciesMapper : ResponseMapper<GetCurrenciesResponse, CurrencyNames>
+internal sealed class GetCurrenciesMapper : ResponseMapper<BaseResponse, GetCurrenciesResponse>
 {
-    public GetCurrenciesResponse FromEntity(Dictionary<string, string> currencyNames) =>
-        new()
-        {
-            Names = currencyNames
-        };
+    public BaseResponse FromEntity(GetCurrenciesResponse getCurrenciesResponse) =>
+        new(getCurrenciesResponse);
 }
