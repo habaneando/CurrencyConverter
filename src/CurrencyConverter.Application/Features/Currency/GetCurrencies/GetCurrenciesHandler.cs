@@ -2,7 +2,7 @@
 
 public sealed record GetCurrenciesHandler
 (
-    IGetCurrenciesService CurrencyRateService,
+    IGetCurrenciesService GetCurrenciesService,
     GetCurrenciesQueryValidator GetCurrenciesQueryValidator
 ) : IQueryHandler<GetCurrenciesQuery, GetCurrenciesResponse>
 {
@@ -18,7 +18,7 @@ public sealed record GetCurrenciesHandler
                 string.Join(", ", validation.Errors.Select(e => e.ErrorMessage)));
         }
 
-        var currencyNames = await CurrencyRateService.GetCurrenciesAsync()
+        var currencyNames = await GetCurrenciesService.GetCurrenciesAsync()
             .ConfigureAwait(false);
 
         var response = new GetCurrenciesResponse

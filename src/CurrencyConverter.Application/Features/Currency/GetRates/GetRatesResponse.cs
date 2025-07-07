@@ -1,6 +1,8 @@
-﻿namespace CurrencyConverter.Api;
+﻿using System.Text.Json.Serialization;
 
-internal sealed record GetRatesResponse
+namespace CurrencyConverter.Application;
+
+public sealed record GetRatesResponse
 {
     public required float Amount { get; init; }
 

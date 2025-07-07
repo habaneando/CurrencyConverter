@@ -1,10 +1,10 @@
 ﻿namespace CurrencyConverter.Api;
 
 internal class GetRatesEndpoint(
-    IGetRatesService CurrencyRateService,
+    IQueryHandler<GetRatesQuery, GetRatesResponse> Handler,
     CacheSettings CacheSettings,
     ThrottleSettings ThrottlingSettings) 
-    : EndpointWithoutRequest<GetRatesResponse, GetRatesMapper>
+    : EndpointWithoutRequest<BaseResponse, GetRatesMapper>
 {
     public override void Configure()
     {
@@ -26,12 +26,13 @@ internal class GetRatesEndpoint(
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var currentRate = await CurrencyRateService.GetRatesAsync()
-            .ConfigureAwait(false);
+        var query = new GetRatesQuery();
 
-        var getRatesResponse = Map.FromEntity(currentRate);
+        var response = await Handler.Handle(query, ct);
 
-        await SendOkAsync(getRatesResponse, ct)
+        var map = Map.FromEntity(response);
+
+        await SendOkAsync(map, ct)
             .ConfigureAwait(false);
     }
 }
