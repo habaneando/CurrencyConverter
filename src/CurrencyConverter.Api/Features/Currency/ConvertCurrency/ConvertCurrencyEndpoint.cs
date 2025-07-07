@@ -1,11 +1,10 @@
 ﻿namespace CurrencyConverter.Api;
 
 internal class ConvertCurrencyEndpoint(
-    IConvertCurrencyService CurrencyRateService,
-    IExcludeCurrencyCodeValidator ExcludeCurrencyCodeValidator,
+    Application.ICommandHandler<ConvertCurrencyCommand, ConvertCurrencyResponse> Handler,
     CacheSettings CacheSettings,
     ThrottleSettings ThrottlingSettings) 
-    : Endpoint<ConvertCurrencyRequest, ConvertCurrencyResponse, ConvertCurrencyMapper>
+    : Endpoint<ConvertCurrencyRequest, BaseResponse, ConvertCurrencyMapper>
 {
     public override void Configure()
     {
@@ -17,7 +16,8 @@ internal class ConvertCurrencyEndpoint(
 
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
 
-        Policies(CurrencyPolicy.Converter);
+        AllowAnonymous();
+        //Policies(CurrencyPolicy.Converter);
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
 
@@ -26,21 +26,16 @@ internal class ConvertCurrencyEndpoint(
 
     public override async Task HandleAsync(ConvertCurrencyRequest convertCurrencyRequest, CancellationToken ct)
     {
-        if (ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.currency) ||
-            ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.symbols))
-        {
-            ThrowError("Currency not allowed.");
-        }
-
-        var currentRate = await CurrencyRateService.ConvertCurrencyAsync(
+        var command = new ConvertCurrencyCommand(
             convertCurrencyRequest.currency,
             convertCurrencyRequest.symbols,
-            convertCurrencyRequest.amount)
-            .ConfigureAwait(false);
+            convertCurrencyRequest.amount);
 
-        var getRatesResponse = Map.FromEntity(currentRate);
+        var response = await Handler.Handle(command, ct);
 
-        await SendOkAsync(getRatesResponse, ct)
+        var map = Map.FromEntity(response);
+
+        await SendOkAsync(map, ct)
             .ConfigureAwait(false);
     }
 }

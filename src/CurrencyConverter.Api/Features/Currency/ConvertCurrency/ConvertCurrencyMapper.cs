@@ -1,13 +1,7 @@
 ﻿namespace CurrencyConverter.Api;
 
-internal sealed class ConvertCurrencyMapper : ResponseMapper<ConvertCurrencyResponse, CurrencyRates>
+internal sealed class ConvertCurrencyMapper : ResponseMapper<BaseResponse, ConvertCurrencyResponse>
 {
-    public override ConvertCurrencyResponse FromEntity(CurrencyRates currencyRates) =>
-        new()
-        {
-            Amount = currencyRates.Amount,
-            Base = currencyRates.Base,
-            Date = currencyRates.Date,
-            Rates = currencyRates.Rates
-        };
+    public BaseResponse FromEntity(ConvertCurrencyResponse convertCurrencyResponse) =>
+        new(convertCurrencyResponse);
 }

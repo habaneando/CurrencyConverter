@@ -1,6 +1,6 @@
-﻿namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Application;
 
-internal sealed record ConvertCurrencyResponse
+public sealed record ConvertCurrencyResponse
 {
     public required float Amount { get; init; }
 

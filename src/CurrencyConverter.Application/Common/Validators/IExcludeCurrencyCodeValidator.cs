@@ -1,4 +1,4 @@
-﻿namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Application;
 
 public interface IExcludeCurrencyCodeValidator 
 {
