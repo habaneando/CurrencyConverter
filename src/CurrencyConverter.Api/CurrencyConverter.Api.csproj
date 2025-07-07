@@ -57,10 +57,6 @@
     <None Include="Generated/**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Validators\" />
-  </ItemGroup>
-
   <Target Name="CleanGeneratedFolder" BeforeTargets="BeforeBuild">
     <!-- Clean both the persistent Generated folder and the compiler output -->
     <RemoveDir Directories="Generated" Condition="Exists('Generated')" />

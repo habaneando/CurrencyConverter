@@ -16,16 +16,6 @@ public static class DI
 
         services.AddResilienceRefitClient<IGetRatesByPeriodService>(currencyApiBaseAddress);
 
-        services.AddSingleton<ICurrencyCodeValidator, CurrencyCodeValidator>();
-
-        services.AddSingleton<IDateValidator, DateValidator>();
-
-        services.AddSingleton<IExcludeCurrencyCodeProvider, ExcludeCurrencyCodeProvider>();
-
-        services.AddSingleton<IExcludeCurrencyCodeValidator, ExcludeCurrencyCodeValidator>();
-
-        services.AddSingleton<CurrencyFactoryProvider>();
-
         services.AddSingleton<CacheSettings>();
 
         services.AddSingleton<ThrottleSettings>();
