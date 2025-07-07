@@ -18,6 +18,8 @@ builder.Services
     .AddInfrastructure()
     .AddApi();
 
+builder.Services.AddScoped<IQueryHandler<GetCurrenciesQuery, GetCurrenciesResponse>, GetCurrenciesHandler>();
+
 builder.Services
     .AddJwtAuthentication()
     .AddAuthorizationPolicies()
