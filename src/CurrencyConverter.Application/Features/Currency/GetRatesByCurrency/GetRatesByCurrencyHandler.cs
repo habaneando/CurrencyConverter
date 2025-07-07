@@ -18,7 +18,7 @@ public sealed record GetRatesByCurrencyHandler
                 string.Join(", ", validation.Errors.Select(e => e.ErrorMessage)));
         }
 
-        var currencyRates = await GetRatesByCurrencyService.GetRatesByCurrencyAsync(getRatesByCurrencyQuery.currency)
+        var currencyRates = await GetRatesByCurrencyService.GetRatesByCurrencyAsync(getRatesByCurrencyQuery.Currency)
             .ConfigureAwait(false);
 
         var response = new GetRatesByCurrencyResponse

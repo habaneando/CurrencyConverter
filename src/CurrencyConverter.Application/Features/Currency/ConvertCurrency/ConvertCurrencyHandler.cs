@@ -19,9 +19,9 @@ public sealed record ConvertCurrencyHandler
         }
 
         var currencyRates = await ConvertCurrencyService.ConvertCurrencyAsync(
-            convertCurrencyCommand.currency,
-            convertCurrencyCommand.symbols,
-            convertCurrencyCommand.amount)
+            convertCurrencyCommand.Currency,
+            convertCurrencyCommand.Symbols,
+            convertCurrencyCommand.Amount)
             .ConfigureAwait(false);
 
         var response = new ConvertCurrencyResponse

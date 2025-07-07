@@ -1,3 +1,3 @@
 ﻿namespace CurrencyConverter.Application;
 
-public sealed record ConvertCurrencyCommand(string currency, string symbols, float amount);
+public sealed record ConvertCurrencyCommand(string Currency, string Symbols, float Amount);

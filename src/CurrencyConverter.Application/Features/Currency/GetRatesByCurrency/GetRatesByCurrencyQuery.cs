@@ -1,3 +1,3 @@
 ﻿namespace CurrencyConverter.Application;
 
-public sealed record GetRatesByCurrencyQuery(string currency);
+public sealed record GetRatesByCurrencyQuery(string Currency);
