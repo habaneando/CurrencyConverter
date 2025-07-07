@@ -1,14 +1,7 @@
 ﻿namespace CurrencyConverter.Api;
 
-internal sealed class GetRatesByPeriodMapper : ResponseMapper<GetRatesByPeriodResponse, PeriodCurrencyRates>
+internal sealed class GetRatesByPeriodMapper : ResponseMapper<BaseResponse, GetRatesByPeriodResponse>
 {
-    public override GetRatesByPeriodResponse FromEntity(PeriodCurrencyRates periodCurrencyRates) =>
-        new()
-        {
-            Amount = periodCurrencyRates.Amount,
-            Base = periodCurrencyRates.Base,
-            StartDate = periodCurrencyRates.StartDate,
-            EndDate = periodCurrencyRates.EndDate,
-            Rates = periodCurrencyRates.Rates
-        };
+    public BaseResponse FromEntity(GetRatesByPeriodResponse getRatesByPeriodResponse) =>
+        new(getRatesByPeriodResponse);
 }

@@ -1,6 +1,6 @@
-﻿namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Application;
 
-internal sealed record GetRatesByPeriodResponse
+public sealed record GetRatesByPeriodResponse
 {
     public required float Amount { get; init; }
 

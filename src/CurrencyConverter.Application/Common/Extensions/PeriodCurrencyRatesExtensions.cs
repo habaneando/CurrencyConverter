@@ -1,4 +1,4 @@
-﻿namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Application;
 
 internal static class PeriodCurrencyRatesExtensions
 {

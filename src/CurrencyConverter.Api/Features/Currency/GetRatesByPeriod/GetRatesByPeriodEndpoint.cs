@@ -1,10 +1,10 @@
 ﻿namespace CurrencyConverter.Api;
 
 internal class GetRatesByPeriodEndpoint(
-    IGetRatesByPeriodService GetRatesByPeriodService,
+    IQueryHandler<GetRatesByPeriodQuery, GetRatesByPeriodResponse> Handler,
     CacheSettings CacheSettings,
     ThrottleSettings ThrottlingSettings)
-    : Endpoint<GetRatesByPeriodRequest, GetRatesByPeriodResponse, GetRatesByPeriodMapper>
+    : Endpoint<GetRatesByPeriodRequest, BaseResponse, GetRatesByPeriodMapper>
 {
     public override void Configure()
     {
@@ -16,7 +16,8 @@ internal class GetRatesByPeriodEndpoint(
 
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
 
-        Policies(CurrencyPolicy.Reader);
+        AllowAnonymous();
+        //Policies(CurrencyPolicy.Reader);
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
 
@@ -25,17 +26,17 @@ internal class GetRatesByPeriodEndpoint(
 
     public override async Task HandleAsync(GetRatesByPeriodRequest getRatesByPeriodRequest, CancellationToken ct)
     {
-        var periodCurrentRates = await GetRatesByPeriodService.GetRatesByPeriodAsync(
+        var query = new GetRatesByPeriodQuery(
             getRatesByPeriodRequest.from,
             getRatesByPeriodRequest.to,
-            getRatesByPeriodRequest.currency)
-            .ConfigureAwait(false);
+            getRatesByPeriodRequest.currency,
+            getRatesByPeriodRequest.page);
 
-        var periodCurrentRatesPaged =  periodCurrentRates.WithItemsForPage(getRatesByPeriodRequest.page);
+        var response = await Handler.Handle(query, ct);
 
-        var getRatesByPeriodResponse = Map.FromEntity(periodCurrentRatesPaged);
+        var map = Map.FromEntity(response);
 
-        await SendOkAsync(getRatesByPeriodResponse, ct)
+        await SendOkAsync(map, ct)
             .ConfigureAwait(false);
     }
 }

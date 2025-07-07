@@ -1,4 +1,4 @@
-﻿namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Application;
 
 public class PagedList<T> : IPagedList<T>
 {
