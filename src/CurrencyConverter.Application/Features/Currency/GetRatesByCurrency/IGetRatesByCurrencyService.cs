@@ -1,6 +1,6 @@
-﻿namespace CurrencyConverter.Api;
+﻿namespace CurrencyConverter.Application;
 
-public interface IGetRatesByCurrencyService : IRefitService
+public interface IGetRatesByCurrencyService
 {
     [Get("/v1/latest")]
     Task<CurrencyRates> GetRatesByCurrencyAsync([Query] string @base);

@@ -1,10 +1,10 @@
 ﻿namespace CurrencyConverter.Api;
 
 internal class GetRatesByCurrencyEndpoint(
-    IGetRatesByCurrencyService CurrencyRateService,
+    IQueryHandler<GetRatesByCurrencyQuery, GetRatesByCurrencyResponse> Handler,
     CacheSettings CacheSettings,
     ThrottleSettings ThrottlingSettings) 
-    : Endpoint<GetRatesByCurrencyRequest, GetRatesByCurrencyResponse, GetRatesByCurrencyMapper>
+    : Endpoint<GetRatesByCurrencyRequest, BaseResponse, GetRatesByCurrencyMapper>
 {
     public override void Configure()
     {
@@ -16,7 +16,8 @@ internal class GetRatesByCurrencyEndpoint(
 
         Options(x => x.CacheOutput(p => p.Expire(CacheSettings.CacheDuration)));
 
-        Policies(CurrencyPolicy.Reader);
+        AllowAnonymous();
+        //Policies(CurrencyPolicy.Reader);
 
         Throttle(ThrottlingSettings.HitLimit, ThrottlingSettings.DurationSeconds);
 
@@ -25,12 +26,13 @@ internal class GetRatesByCurrencyEndpoint(
 
     public override async Task HandleAsync(GetRatesByCurrencyRequest getRatesByCurrencyRequest, CancellationToken ct)
     {
-        var currentRate = await CurrencyRateService.GetRatesByCurrencyAsync(getRatesByCurrencyRequest.currency)
-            .ConfigureAwait(false);
+        var query = new GetRatesByCurrencyQuery(getRatesByCurrencyRequest.currency);
 
-        var getRatesResponse = Map.FromEntity(currentRate);
+        var response = await Handler.Handle(query, ct);
 
-        await SendOkAsync(getRatesResponse, ct)
+        var map = Map.FromEntity(response);
+
+        await SendOkAsync(map, ct)
             .ConfigureAwait(false);
     }
 }

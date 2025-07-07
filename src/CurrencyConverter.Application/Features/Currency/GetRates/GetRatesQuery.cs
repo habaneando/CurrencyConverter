@@ -1,5 +1,3 @@
 ﻿namespace CurrencyConverter.Application;
 
-public sealed record GetRatesQuery
-{
-}
+public sealed record GetRatesQuery();
