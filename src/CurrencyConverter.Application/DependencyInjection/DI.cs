@@ -8,9 +8,9 @@ public static class DI
 
         services.AddSingleton<IDateValidator, DateValidator>();
 
-        services.AddSingleton<IExcludeCurrencyCodeProvider, ExcludeCurrencyCodeProvider>();
+        services.AddSingleton<IExcludedCurrencyProvider, ExcludedCurrencyProvider>();
 
-        services.AddSingleton<IExcludeCurrencyCodeValidator, ExcludeCurrencyCodeValidator>();
+        services.AddSingleton<IExcludedCurrencyValidator, ExcludedCurrencyValidator>();
 
         services.AddSingleton<CurrencyFactoryProvider>();
 

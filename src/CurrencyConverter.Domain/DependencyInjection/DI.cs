@@ -4,11 +4,11 @@ public static class DI
 {
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        services.AddScoped<ICurrencyProvider, InMemoryCurrencyProvider>();
+        services.AddSingleton<ICurrencyProvider, InMemoryCurrencyProvider>();
 
-        services.AddScoped<Currency2.Factory>();
+        services.AddSingleton<Currency2.Factory>();
 
-        services.AddScoped<Money.Factory>();
+        services.AddSingleton<Money.Factory>();
 
         return services;
     }

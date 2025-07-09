@@ -9,7 +9,11 @@ public class InMemoryCurrencyProvider : ICurrencyProvider
         { "JPY", new("JPY", "¥", 0) },
         { "GBP", new("GBP", "£", 2) },
         { "CHF", new("CHF", "CHF", 2) },
-        { "BTC", new("BTC", "₿", 8) }
+        { "BTC", new("BTC", "₿", 8) },
+        { "TRY", new("TRY", "₺", 2) },
+        { "PLN", new("PLN", "zł", 2) },
+        { "THB", new("THB", "฿", 2) },
+        { "MXN", new("MXN", "$", 2) }
     };
 
     public Task<CurrencyInfo> GetCurrencyInfo(string currencyCode)

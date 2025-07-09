@@ -4,7 +4,7 @@ public class ConvertCurrencyCommandValidator
     : AbstractValidator<ConvertCurrencyCommand>
 {
 
-    public ConvertCurrencyCommandValidator(IExcludeCurrencyCodeValidator ExcludeCurrencyCodeValidator)
+    public ConvertCurrencyCommandValidator(IExcludedCurrencyValidator ExcludeCurrencyValidator)
     {
         //if (ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.currency) ||
         //    ExcludeCurrencyCodeValidator.IsNotAllowed(convertCurrencyRequest.symbols))
