@@ -5,9 +5,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Enums\" />
+    <Folder Include="Events\" />
+    <Folder Include="ExternalServiceContracts\" />
+    <Folder Include="EventHandlerContracts\" />
     <Folder Include="Events\" />
     <Folder Include="EventHandlerContracts\" />
-    <Folder Include="DomainServices\" />
     <Folder Include="ExternalServiceContracts\" />
   </ItemGroup>
 
