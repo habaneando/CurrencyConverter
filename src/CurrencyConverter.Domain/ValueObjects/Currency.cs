@@ -1,6 +1,6 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public record Currency2
+public record Currency
 {
     public string Code { get; init; }
 
@@ -8,7 +8,7 @@ public record Currency2
 
     public int DecimalPlaces { get; init; }
 
-    private Currency2(string code, string symbol, int decimalPlaces)
+    private Currency(string code, string symbol, int decimalPlaces)
     {
         Guard.EmptyCurrencyCode(code);
 
@@ -27,7 +27,7 @@ public record Currency2
 
     public class Factory(ICurrencyProvider CurrencyProvider)
     {
-        public async Task<Currency2> Create(string currencyCode)
+        public async Task<Currency> Create(string currencyCode)
         {
             Guard.EmptyCurrencyCode(currencyCode);
 
@@ -36,7 +36,7 @@ public record Currency2
             var info = await CurrencyProvider.GetCurrencyInfo(currencyCode)
                 .ConfigureAwait(false);
 
-            return new Currency2(
+            return new Currency(
                 info.Code,
                 info.Symbol,
                 info.DecimalPlaces);

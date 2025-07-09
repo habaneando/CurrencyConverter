@@ -2,7 +2,7 @@
 
 public class CurrencyCodeValidator : AbstractValidator<string>, ICurrencyCodeValidator
 {
-    public CurrencyCodeValidator(Currency2.Factory currencyFactory)
+    public CurrencyCodeValidator(Currency.Factory currencyFactory)
     {
         RuleFor(x => x)
             .NotEmpty()

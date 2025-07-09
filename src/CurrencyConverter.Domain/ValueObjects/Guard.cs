@@ -34,19 +34,19 @@ public static class Guard
             throw new ArgumentException("Currency code must be a 3-letter ISO 4217 code.", nameof(currencyCode));
     }
 
-    public static void NullCurrency(Currency2 currency)
+    public static void NullCurrency(Currency currency)
     {
         if (currency == null)
             throw new ArgumentNullException(nameof(currency), "Currency cannot be null.");
     }
 
-    public static void DifferentCurrency(Currency2 currency, Currency2 otherCurrency)
+    public static void DifferentCurrency(Currency currency, Currency otherCurrency)
     {
         if (!currency.Equals(otherCurrency))
             throw new InvalidOperationException($"Cannot compare {currency.Code} with {otherCurrency.Code}. Currencies must match.");
     }
 
-    public static void DifferentAmountPrecisionAndDecimalPlaces(decimal amount, Currency2 currency)
+    public static void DifferentAmountPrecisionAndDecimalPlaces(decimal amount, Currency currency)
     {
         var factor = (decimal)Math.Pow(10, currency.DecimalPlaces);
 
@@ -54,13 +54,13 @@ public static class Guard
             throw new ArgumentException($"Amount precision cannot exceed {currency.DecimalPlaces} decimal places for {currency.Code}.", nameof(amount));
     }
 
-    public static void AddDifferentCurrencyCode(Currency2 currency, Currency2 otherCurrency)
+    public static void AddDifferentCurrencyCode(Currency currency, Currency otherCurrency)
     {
         if (!currency.Equals(otherCurrency))
             throw new InvalidOperationException($"Cannot add {otherCurrency.Code} to {currency.Code}. Currencies must match.");
     }
 
-    public static void SubstractDifferentCurrencyCode(Currency2 currency, Currency2 otherCurrency)
+    public static void SubstractDifferentCurrencyCode(Currency currency, Currency otherCurrency)
     {
         if (!currency.Equals(otherCurrency))
             throw new InvalidOperationException($"Cannot subtract {otherCurrency.Code} from {currency.Code}. Currencies must match.");

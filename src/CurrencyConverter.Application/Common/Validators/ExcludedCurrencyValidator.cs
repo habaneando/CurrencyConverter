@@ -2,7 +2,7 @@
 
 public class ExcludedCurrencyValidator(
     IExcludedCurrencyProvider ExcludedCurrencyProvider,
-    Currency2.Factory CurrencyFactory)
+    Currency.Factory CurrencyFactory)
     : IExcludedCurrencyValidator
 {
     public bool IsValid(string currencyCode)

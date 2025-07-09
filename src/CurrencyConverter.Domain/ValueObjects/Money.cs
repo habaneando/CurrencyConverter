@@ -4,7 +4,7 @@ public class Money
 {
     public decimal Amount { get; init; }
 
-    public Currency2 Currency { get; init; }
+    public Currency Currency { get; init; }
 
     public bool IsZero => Amount == 0;
 
@@ -12,7 +12,7 @@ public class Money
 
     public bool IsNegative => Amount < 0;
 
-    private Money(decimal amount, Currency2 currency)
+    private Money(decimal amount, Currency currency)
     {
         Guard.NegativeAmount(amount);
 
@@ -88,7 +88,7 @@ public class Money
     public static bool operator <=(Money left, Money right) =>
         left.CompareTo(right) <= 0;
 
-    public class Factory(Currency2.Factory CurrencyFactory)
+    public class Factory(Currency.Factory CurrencyFactory)
     {
         public async Task<Money> Create(decimal amount, string currencyCode)
         {
@@ -103,7 +103,7 @@ public class Money
             return new Money(amount, currency);
         }
 
-        public Money Create(decimal amount, Currency2 currency)
+        public Money Create(decimal amount, Currency currency)
         {
             Guard.NegativeAmount(amount);
 

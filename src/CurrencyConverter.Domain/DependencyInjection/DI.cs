@@ -6,7 +6,7 @@ public static class DI
     {
         services.AddSingleton<ICurrencyProvider, InMemoryCurrencyProvider>();
 
-        services.AddSingleton<Currency2.Factory>();
+        services.AddSingleton<Currency.Factory>();
 
         services.AddSingleton<Money.Factory>();
 
