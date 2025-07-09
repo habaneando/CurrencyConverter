@@ -4,7 +4,8 @@ public sealed record GetRatesHandler
 (
     IGetRatesService GetRatesService,
     GetRatesQueryValidator GetRatesQueryValidator
-) : IQueryHandler<GetRatesQuery, GetRatesResponse>
+)
+    : IQueryHandler<GetRatesQuery, GetRatesResponse>
 {
     public async Task<GetRatesResponse> Handle(GetRatesQuery getRatesQuery, CancellationToken cancellationToken)
     {

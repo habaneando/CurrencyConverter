@@ -4,7 +4,8 @@ public sealed record ConvertCurrencyHandler
 (
     IConvertCurrencyService ConvertCurrencyService,
     ConvertCurrencyCommandValidator ConvertCurrencyCommandValidator
-) : ICommandHandler<ConvertCurrencyCommand, ConvertCurrencyResponse>
+)
+    : ICommandHandler<ConvertCurrencyCommand, ConvertCurrencyResponse>
 {
     public async Task<ConvertCurrencyResponse> Handle(ConvertCurrencyCommand convertCurrencyCommand, CancellationToken cancellationToken)
     {

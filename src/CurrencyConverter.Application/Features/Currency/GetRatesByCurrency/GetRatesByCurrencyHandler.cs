@@ -4,7 +4,8 @@ public sealed record GetRatesByCurrencyHandler
 (
     IGetRatesByCurrencyService GetRatesByCurrencyService,
     GetRatesByCurrencyQueryValidator GetRatesByCurrencyQueryValidator
-) : IQueryHandler<GetRatesByCurrencyQuery, GetRatesByCurrencyResponse>
+)
+    : IQueryHandler<GetRatesByCurrencyQuery, GetRatesByCurrencyResponse>
 {
     public async Task<GetRatesByCurrencyResponse> Handle(GetRatesByCurrencyQuery getRatesByCurrencyQuery, CancellationToken cancellationToken)
     {

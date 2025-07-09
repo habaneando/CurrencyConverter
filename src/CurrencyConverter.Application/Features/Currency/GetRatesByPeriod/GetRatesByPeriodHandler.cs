@@ -4,7 +4,8 @@ public sealed record GetRatesByPeriodHandler
 (
     IGetRatesByPeriodService GetRatesByPeriodService,
     GetRatesByPeriodQueryValidator GetRatesByPeriodQueryValidator
-) : IQueryHandler<GetRatesByPeriodQuery, GetRatesByPeriodResponse>
+)
+    : IQueryHandler<GetRatesByPeriodQuery, GetRatesByPeriodResponse>
 {
     public async Task<GetRatesByPeriodResponse> Handle(GetRatesByPeriodQuery getRatesByPeriodQuery, CancellationToken cancellationToken)
     {
