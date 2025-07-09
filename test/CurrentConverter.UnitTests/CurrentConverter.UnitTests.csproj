@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="C:\Users\marce\Source\Repos\CurrencyConverter\\GlobalUsings.cs" />
+    <Compile Remove="C:\Users\marce\source\repos\CurrencyConverter\\GlobalUsings.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +19,16 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Currency\GetRatesByPeriod\" />
+    <Folder Include="Features\Currency\GetRatesByCurrency\" />
+    <Folder Include="Features\Currency\GetRates\" />
+    <Folder Include="Features\Currency\GetCurrencies\" />
+    <Folder Include="Features\Security\UserLogin\" />
+    <Folder Include="Features\Security\" />
+    <Folder Include="Domain\" />
   </ItemGroup>
 
 </Project>
