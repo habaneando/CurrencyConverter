@@ -7,11 +7,16 @@ public sealed record InterestRate
 
     public decimal MonthlyRate => Rate / 12m;
 
-    public InterestRate(decimal rate)
+    private InterestRate(decimal rate)
+    {
+        Rate = rate;
+    }   
+
+    public static InterestRate Create(decimal rate)
     {
         if (rate< 0)
             throw new ArgumentException("Rate must be non-negative");
 
-        Rate = rate;
+        return new InterestRate(rate);
     }
 }

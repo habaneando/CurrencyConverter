@@ -7,11 +7,16 @@ public sealed record LoanTerm
 
     public int Years => Months / 12;
 
-    public LoanTerm(int months)
+    private LoanTerm(int months)
+    {
+        Months = months;
+    }
+
+    public static LoanTerm Create(int months)
     {
         if (months <= 0)
             throw new ArgumentException("Term must be positive");
 
-        Months = months;
+        return new LoanTerm(months);
     }
 }

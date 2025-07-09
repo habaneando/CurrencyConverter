@@ -10,17 +10,13 @@ public record Currency2
 
     private Currency2(string code, string symbol, int decimalPlaces)
     {
-        if (string.IsNullOrWhiteSpace(Code))
-            throw new ArgumentException("Currency code cannot be empty.", nameof(code));
+        Guard.EmptyCurrencyCode(code);
 
-        if (Code.Length != 3 || !Code.All(char.IsLetter))
-            throw new ArgumentException("Currency code must be a 3-letter ISO 4217 code.", nameof(code));
+        Guard.InvalidISOCurrencyCode(code);
 
-        if (string.IsNullOrWhiteSpace(Symbol))
-            throw new ArgumentException("Currency symbol cannot be empty.", nameof(symbol));
+        Guard.EmptyCurrencySymbol(symbol);
 
-        if (decimalPlaces < 0)
-            throw new ArgumentException("Decimal places cannot be negative.", nameof(decimalPlaces));
+        Guard.NegativeDecimalPlaces(decimalPlaces);
 
         Code = code.ToUpperInvariant();
 
@@ -31,15 +27,14 @@ public record Currency2
 
     public class Factory(ICurrencyProvider CurrencyProvider)
     {
-        public Currency2 Create(string currencyCode)
+        public async Task<Currency2> Create(string currencyCode)
         {
-            if (string.IsNullOrWhiteSpace(currencyCode))
-                throw new ArgumentException("Currency code cannot be empty.", nameof(currencyCode));
+            Guard.EmptyCurrencyCode(currencyCode);
 
-            if (currencyCode.Length != 3 || !currencyCode.All(char.IsLetter))
-                throw new ArgumentException("Currency code must be a 3-letter ISO 4217 code.", nameof(currencyCode));
+            Guard.InvalidISOCurrencyCode(currencyCode); 
 
-            var info = CurrencyProvider.GetCurrencyInfo(currencyCode);
+            var info = await CurrencyProvider.GetCurrencyInfo(currencyCode)
+                .ConfigureAwait(false);
 
             return new Currency2(
                 info.Code,

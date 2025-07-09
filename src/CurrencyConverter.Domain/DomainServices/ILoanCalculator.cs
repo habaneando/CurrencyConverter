@@ -2,5 +2,5 @@
 
 public interface ILoanCalculator
 {
-    Money CalculateMonthlyPayment(Loan loan);
+    Task<Money> CalculateMonthlyPayment(Loan loan);
 }

@@ -36,8 +36,6 @@ public class Loan
         LoanCalculator = loanCalculator;
     }
 
-    public Money CalculateTotalRepayment()
-    {
-        return LoanCalculator.CalculateMonthlyPayment(this);
-    }
+    public Task<Money> CalculateTotalRepayment() =>
+        LoanCalculator.CalculateMonthlyPayment(this);
 }

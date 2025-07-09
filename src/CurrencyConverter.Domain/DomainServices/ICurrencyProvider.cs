@@ -2,5 +2,5 @@
 
 public interface ICurrencyProvider
 {
-    CurrencyInfo GetCurrencyInfo(string currencyCode);
+    Task<CurrencyInfo> GetCurrencyInfo(string currencyCode);
 }

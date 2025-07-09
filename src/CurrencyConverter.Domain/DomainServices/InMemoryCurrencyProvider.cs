@@ -12,11 +12,11 @@ public class InMemoryCurrencyProvider : ICurrencyProvider
         { "BTC", new("BTC", "₿", 8) }
     };
 
-    public CurrencyInfo GetCurrencyInfo(string currencyCode)
+    public Task<CurrencyInfo> GetCurrencyInfo(string currencyCode)
     {
         if (!_currencies.TryGetValue(currencyCode.ToUpperInvariant(), out var info))
             throw new ArgumentException($"Currency code '{currencyCode}' is not supported.", nameof(currencyCode));
 
-        return info;
+        return Task.FromResult(info);
     }
 }
