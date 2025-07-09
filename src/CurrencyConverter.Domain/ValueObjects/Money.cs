@@ -98,7 +98,8 @@ public class Money
 
             Guard.EmptyCurrencyCode(currencyCode);
 
-            var currency = await CurrencyFactory.Create(currencyCode).ConfigureAwait(false);
+            var currency = await CurrencyFactory.Create(currencyCode)
+                .ConfigureAwait(false);
 
             return new Money(amount, currency);
         }

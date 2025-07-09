@@ -25,11 +25,11 @@ public class Loan
     {
         Id = id;
 
-        Principal = principal ?? throw new ArgumentNullException(nameof(principal));
+        Principal = principal;
 
-        AnnualInterestRate = annualInterestRate ?? throw new ArgumentNullException(nameof(annualInterestRate));
+        AnnualInterestRate = annualInterestRate;
 
-        Term = term ?? throw new ArgumentNullException(nameof(term));
+        Term = term;
 
         StartDate = startDate;
 

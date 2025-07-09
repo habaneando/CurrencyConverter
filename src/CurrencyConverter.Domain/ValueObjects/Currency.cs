@@ -8,7 +8,10 @@ public record Currency
 
     public int DecimalPlaces { get; init; }
 
-    private Currency(string code, string symbol, int decimalPlaces)
+    private Currency(
+        string code,
+        string symbol,
+        int decimalPlaces)
     {
         Guard.EmptyCurrencyCode(code);
 
