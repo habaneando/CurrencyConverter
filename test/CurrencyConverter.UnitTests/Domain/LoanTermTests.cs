@@ -3,8 +3,8 @@
 public class LoanTermTests
 {
     [Theory]
-    [MemberData(nameof(LoanTermData.Creation_ShouldBe_Success), MemberType = typeof(LoanTermData))]
-    public void Creation_ShouldBe_Success(int months, LoanTerm result)
+    [MemberData(nameof(LoanTermData.CreateLoanTerm_ShouldBe_Success), MemberType = typeof(LoanTermData))]
+    public void CreateLoanTerm_ShouldBe_Success(int months, LoanTerm result)
     {
         var loanTerm = LoanTerm.Create(months);
 
@@ -14,8 +14,8 @@ public class LoanTermTests
     }
 
     [Theory]
-    [MemberData(nameof(LoanTermData.Creation_ShouldThrow_Exception), MemberType = typeof(LoanTermData))]
-    public void Creation_ShouldThrow_Exception(int months)
+    [MemberData(nameof(LoanTermData.CreateLoanTerm_ShouldThrow_Exception), MemberType = typeof(LoanTermData))]
+    public void CreateLoanTerm_ShouldThrow_Exception(int months)
     {
         Should.Throw<LoanTermCreationException>(() =>
             LoanTerm.Create(months)); 
