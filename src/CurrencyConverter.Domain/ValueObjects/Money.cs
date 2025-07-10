@@ -16,7 +16,7 @@ public class Money
     {
         Guard.NegativeAmount(amount);
 
-        Guard.NullCurrency(currency);
+        Guard.EmptyCurrency(currency);
 
         Guard.DifferentAmountPrecisionAndDecimalPlaces(amount, currency);
 
@@ -108,7 +108,7 @@ public class Money
         {
             Guard.NegativeAmount(amount);
 
-            Guard.NullCurrency(currency);
+            Guard.EmptyCurrency(currency);
 
             return new Money(amount, currency);
         }

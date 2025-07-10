@@ -5,7 +5,7 @@ public static class Guard
     public static void NegativeAmount(decimal amount)
     {
         if (amount < 0)
-            throw new ArgumentException("Amount cannot be negative.", nameof(amount));
+            throw new NegativeAmountMoneyCreationException();
     }
 
     public static void NegativeDecimalPlaces(decimal decimalPlaces)
@@ -34,10 +34,10 @@ public static class Guard
             throw new ArgumentException("Currency code must be a 3-letter ISO 4217 code.", nameof(currencyCode));
     }
 
-    public static void NullCurrency(Currency currency)
+    public static void EmptyCurrency(Currency currency)
     {
         if (currency == null)
-            throw new ArgumentNullException(nameof(currency), "Currency cannot be null.");
+            throw new EmptyCurrencyMoneyCreationException();
     }
 
     public static void DifferentCurrency(Currency currency, Currency otherCurrency)
