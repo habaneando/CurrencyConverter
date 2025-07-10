@@ -7,6 +7,21 @@ public class MoneyData
        {
             new object[]
             {
+                2,
+                "USD",
+                2,
+                "USD",
+                4,
+                "USD"
+            },
+            new object[]
+            {
+                1,
+                "eur",
+                5,
+                "eUr",
+                6,
+                "EuR"
             },
        };
 }

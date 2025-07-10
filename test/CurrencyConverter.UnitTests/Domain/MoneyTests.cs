@@ -2,19 +2,22 @@
 
 public class MoneyTests : BaseDomainTests<BaseDomainTestsFixture>
 {
-    public MoneyTests(BaseDomainTestsFixture fixture)
-        : base(fixture){}
+    public MoneyTests(BaseDomainTestsFixture fixture) : base(fixture){}
 
-    [Fact]
-    public async Task AddMoney_GivenValidMoney_ShouldBeSuccess()
+    [Theory]
+    [MemberData(nameof(MoneyData.AddMoney_GivenValidMoney_ShouldBeSuccess), MemberType = typeof(MoneyData))]
+    public async Task AddMoney_GivenValidMoney_ShouldBeSuccess(decimal amount, string currency, decimal otherAmount, string otherCurrency, decimal expectedAmount, string expectedCurrency)
     {
-        var money = await MoneyFactory.Create(2, "USD");
+        var money = await MoneyFactory.Create(amount, currency);
 
-        var otherMoney = await MoneyFactory.Create(3, "USD");
+        var otherMoney = await MoneyFactory.Create(otherAmount, otherCurrency);
 
-        var result = await MoneyFactory.Create(5, "USD"); 
+        var expectedMoney = await MoneyFactory.Create(expectedAmount, expectedCurrency);
 
-        money.Add(otherMoney).Amount.ShouldBe(result.Amount);
+        var result = money.Add(otherMoney);
+
+        result.ShouldNotBeNull();
+
+        result.ShouldBeEquivalentTo(expectedMoney);
     }
-       
 }
