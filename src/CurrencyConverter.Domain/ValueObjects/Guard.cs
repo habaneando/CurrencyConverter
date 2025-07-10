@@ -17,7 +17,7 @@ public static class Guard
     public static void EmptyCurrencyCode(string currencyCode)
     {
         if (string.IsNullOrWhiteSpace(currencyCode))
-            throw new ArgumentException("Currency code cannot be empty.", nameof(currencyCode));
+            throw new EmptyCodeCurrencyCreationException();
     }
 
     public static void EmptyCurrencySymbol(string symbol)
@@ -31,7 +31,7 @@ public static class Guard
         currencyCode = currencyCode.ToUpperInvariant();
 
         if (currencyCode.Length != 3 || !currencyCode.All(char.IsLetter))
-            throw new ArgumentException("Currency code must be a 3-letter ISO 4217 code.", nameof(currencyCode));
+            throw new InvalidISOCodeCurrencyCreationException(currencyCode);
     }
 
     public static void EmptyCurrency(Currency currency)

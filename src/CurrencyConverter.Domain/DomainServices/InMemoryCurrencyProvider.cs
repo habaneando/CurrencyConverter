@@ -19,7 +19,7 @@ public class InMemoryCurrencyProvider : ICurrencyProvider
     public Task<CurrencyInfo> GetCurrencyInfo(string currencyCode)
     {
         if (!_currencies.TryGetValue(currencyCode.ToUpperInvariant(), out var info))
-            throw new ArgumentException($"Currency code '{currencyCode}' is not supported.", nameof(currencyCode));
+            throw new InvalidISOCodeCurrencyCreationException(currencyCode);
 
         return Task.FromResult(info);
     }
