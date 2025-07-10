@@ -1,9 +1,20 @@
 ﻿namespace CurrencyConverter.UnitTests;
 
-public class MoneyTests
+public class MoneyTests : BaseDomainTests<BaseDomainTestsFixture>
 {
-    [Theory]
-    [MemberData(nameof(MoneyData.Add_Success), MemberType = typeof(MoneyData))]
-    public void Add_Success(Money money, Money otherMoney, Money result) =>
-       money.Add(otherMoney).ShouldBe(result);
+    public MoneyTests(BaseDomainTestsFixture fixture)
+        : base(fixture){}
+
+    [Fact]
+    public async Task AddMoney_GivenValidMoney_ShouldBeSuccess()
+    {
+        var money = await MoneyFactory.Create(2, "USD");
+
+        var otherMoney = await MoneyFactory.Create(3, "USD");
+
+        var result = await MoneyFactory.Create(5, "USD"); 
+
+        money.Add(otherMoney).Amount.ShouldBe(result.Amount);
+    }
+       
 }

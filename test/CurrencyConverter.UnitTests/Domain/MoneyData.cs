@@ -2,7 +2,7 @@
 
 public class MoneyData
 {
-    public static IEnumerable<object[]> Add_Success =>
+    public static IEnumerable<object[]> AddMoney_GivenValidMoney_ShouldBeSuccess =>
        new List<object[]>
        {
             new object[]
