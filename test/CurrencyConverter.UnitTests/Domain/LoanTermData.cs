@@ -2,7 +2,7 @@
 
 public class LoanTermData
 {
-    public static IEnumerable<object[]> CreateLoanTerm_ShouldBe_Success =>
+    public static IEnumerable<object[]> CreateLoanTerm_GivenValidMonths_ShouldBeSuccess =>
        new List<object[]>
        {
             new object[]
@@ -22,7 +22,7 @@ public class LoanTermData
             }
        };
 
-    public static IEnumerable<object[]> CreateLoanTerm_ShouldThrow_Exception =>
+    public static IEnumerable<object[]> CreateLoanTerm_GivenInvalidMonths_ShouldThrowException =>
        new List<object[]>
        {
             new object[]

@@ -3,8 +3,8 @@
 public class InterestRateTests
 {
     [Theory]
-    [MemberData(nameof(InterestRateData.CreateInterestRate_ShouldBe_Success), MemberType = typeof(InterestRateData))]
-    public void CreateInterestRate_ShouldBe_Success(decimal rate, InterestRate interestRateResult)
+    [MemberData(nameof(InterestRateData.CreateInterestRate_GivenValidRate_ShouldBeSuccess), MemberType = typeof(InterestRateData))]
+    public void CreateInterestRate_GivenValidRate_ShouldBeSuccess(decimal rate, InterestRate interestRateResult)
     {
         var interestRate = InterestRate.Create(rate);
 
@@ -14,8 +14,8 @@ public class InterestRateTests
     }
 
     [Theory]
-    [MemberData(nameof(InterestRateData.CreateInterestRate_ShouldThrow_Exception), MemberType = typeof(InterestRateData))]
-    public void CreateInterestRate_ShouldThrow_Exception(decimal rate)
+    [MemberData(nameof(InterestRateData.CreateInterestRate_GivenInvalidRate_ShouldThrowException), MemberType = typeof(InterestRateData))]
+    public void CreateInterestRate_GivenInvalidRate_ShouldThrowException(decimal rate)
     {
         Should.Throw<InterestRateCreationException>(() =>
             InterestRate.Create(rate)); 

@@ -2,7 +2,7 @@
 
 public class InterestRateData
 {
-    public static IEnumerable<object[]> CreateInterestRate_ShouldBe_Success =>
+    public static IEnumerable<object[]> CreateInterestRate_GivenValidRate_ShouldBeSuccess =>
        new List<object[]>
        {
             new object[]
@@ -17,7 +17,7 @@ public class InterestRateData
             }
        };
 
-    public static IEnumerable<object[]> CreateInterestRate_ShouldThrow_Exception =>
+    public static IEnumerable<object[]> CreateInterestRate_GivenInvalidRate_ShouldThrowException =>
        new List<object[]>
        {
             new object[]
