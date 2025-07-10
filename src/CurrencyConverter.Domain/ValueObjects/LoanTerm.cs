@@ -15,7 +15,7 @@ public sealed record LoanTerm
     public static LoanTerm Create(int months)
     {
         if (months <= 0)
-            throw new ArgumentException("Term must be positive");
+            throw new LoanTermCreationException();
 
         return new LoanTerm(months);
     }
