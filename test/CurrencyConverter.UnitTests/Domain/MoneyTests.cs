@@ -20,4 +20,15 @@ public class MoneyTests : BaseDomainTests<BaseDomainTestsFixture>
 
         result.ShouldBeEquivalentTo(expectedMoney);
     }
+    [Theory]
+    [MemberData(nameof(MoneyData.AddMoney_GivenDifferentCurrency_ShouldThrowException), MemberType = typeof(MoneyData))]
+    public async Task AddMoney_GivenDifferentCurrency_ShouldThrowException(decimal amount, string currency, decimal otherAmount, string otherCurrency)
+    {
+        var money = await MoneyFactory.Create(amount, currency);
+
+        var otherMoney = await MoneyFactory.Create(otherAmount, otherCurrency);
+
+        Should.Throw<InvalidMoneyOperationException>(() =>
+            money.Add(otherMoney)); 
+    }
 }

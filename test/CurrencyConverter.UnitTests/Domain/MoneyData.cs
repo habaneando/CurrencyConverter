@@ -24,4 +24,23 @@ public class MoneyData
                 "EuR"
             },
        };
+
+    public static IEnumerable<object[]> AddMoney_GivenDifferentCurrency_ShouldThrowException =>
+       new List<object[]>
+       {
+            new object[]
+            {
+                8,
+                "USD",
+                1,
+                "EUR"
+            },
+            new object[]
+            {
+                6,
+                "EUR",
+                2,
+                "JPY"
+            },
+       };
 }

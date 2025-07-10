@@ -57,13 +57,13 @@ public static class Guard
     public static void AddDifferentCurrencyCode(Currency currency, Currency otherCurrency)
     {
         if (!currency.Equals(otherCurrency))
-            throw new InvalidOperationException($"Cannot add {otherCurrency.Code} to {currency.Code}. Currencies must match.");
+            throw new InvalidMoneyOperationException(currency.Code, otherCurrency.Code);
     }
 
     public static void SubstractDifferentCurrencyCode(Currency currency, Currency otherCurrency)
     {
         if (!currency.Equals(otherCurrency))
-            throw new InvalidOperationException($"Cannot subtract {otherCurrency.Code} from {currency.Code}. Currencies must match.");
+            throw new InvalidMoneyOperationException(currency.Code, otherCurrency.Code);
     }
 
     public static void NegativeFactor(decimal factor)
