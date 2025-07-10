@@ -4,13 +4,13 @@ public class LoanTermTests
 {
     [Theory]
     [MemberData(nameof(LoanTermData.CreateLoanTerm_ShouldBe_Success), MemberType = typeof(LoanTermData))]
-    public void CreateLoanTerm_ShouldBe_Success(int months, LoanTerm result)
+    public void CreateLoanTerm_ShouldBe_Success(int months, LoanTerm loanTermResult)
     {
         var loanTerm = LoanTerm.Create(months);
 
         loanTerm.ShouldNotBeNull();
 
-        loanTerm.Months.ShouldBe(result.Months);
+        loanTerm.Months.ShouldBe(loanTermResult.Months);
     }
 
     [Theory]

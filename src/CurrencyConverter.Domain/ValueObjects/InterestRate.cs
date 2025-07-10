@@ -15,7 +15,7 @@ public sealed record InterestRate
     public static InterestRate Create(decimal rate)
     {
         if (rate< 0)
-            throw new ArgumentException("Rate must be non-negative");
+            throw new InterestRateCreationException();
 
         return new InterestRate(rate);
     }
