@@ -1,6 +1,5 @@
 ﻿namespace CurrencyConverter.Domain;
 
-// Immutable, self-validating, no ID
 public sealed record LoanTerm
 {
     public int Months { get; }

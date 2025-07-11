@@ -1,6 +1,6 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public class Money
+public sealed record Money
 {
     public decimal Amount { get; init; }
 

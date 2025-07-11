@@ -1,6 +1,6 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public record Currency
+public sealed record Currency
 {
     public string Code { get; init; }
 
