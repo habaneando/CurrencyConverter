@@ -1,40 +1,54 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public class Loan
+public class Loan : Entity
 {
-    public Guid Id { get; init; }
+    public int CustomerId { get; init; }
 
-    public Money Principal { get; init; }
+    public decimal Amount { get; init; }
 
-    public InterestRate AnnualInterestRate { get; init; }
+    public decimal InterestRate { get; init; }
 
-    public LoanTerm Term { get; init; }
+    public int TermInMonths { get; init; }
 
-    public DateTime StartDate { get; init; }
+    public LoanStatus Status { get; set; }
+
+    public LoanType Type { get; set; }
+
+    public DateTime ApprovalDate { get; init; }
 
     public ILoanCalculator LoanCalculator { get; init; }
 
     public Loan(
-        Guid id,
-        Money principal,
-        InterestRate annualInterestRate,
-        LoanTerm term,
-        DateTime startDate,
-        ILoanCalculator loanCalculator)
+        int id,
+        int customerId,
+        decimal amount,
+        decimal interestRate,
+        int termInMonths,
+        LoanStatus status,
+        DateTime approvalDate,
+        LoanType type
+        //ILoanCalculator loanCalculator
+        )
     {
         Id = id;
 
-        Principal = principal;
+        CustomerId = customerId;
 
-        AnnualInterestRate = annualInterestRate;
+        Amount = amount;
 
-        Term = term;
+        InterestRate = interestRate;
 
-        StartDate = startDate;
+        TermInMonths = termInMonths;
 
-        LoanCalculator = loanCalculator;
+        Status = status;
+
+        ApprovalDate = approvalDate;
+
+        Type = type;
+
+        //LoanCalculator = loanCalculator;
     }
 
-    public Task<Money> CalculateTotalRepayment() =>
-        LoanCalculator.CalculateMonthlyPayment(this);
+    //public Task<Money> CalculateTotalRepayment() =>
+    //    LoanCalculator.CalculateMonthlyPayment(this);
 }

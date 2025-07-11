@@ -16,6 +16,12 @@ public class BaseDomainTestsFixture : IDisposable
 
         services.AddSingleton<Money.Factory>();
 
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+        services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+        services.AddScoped<ILoanRepository, LoanRepository>();
+
         ServiceProvider = services.BuildServiceProvider();
     }
 

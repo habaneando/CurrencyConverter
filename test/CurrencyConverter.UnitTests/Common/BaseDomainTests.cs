@@ -11,6 +11,12 @@ public abstract class BaseDomainTests<TFixture> : IClassFixture<TFixture>
 
     public Money.Factory MoneyFactory { get; init; }
 
+    public ICustomerRepository CustomerRepository { get; init; }
+
+    public IPaymentRepository PaymentRepository { get; init; }
+
+    public ILoanRepository LoanRepository { get; init; }
+
     protected BaseDomainTests(TFixture fixture)
     {
         Fixture = fixture
@@ -24,5 +30,14 @@ public abstract class BaseDomainTests<TFixture> : IClassFixture<TFixture>
 
         MoneyFactory = fixture.ServiceProvider.GetService<Money.Factory>()
             ?? throw new InvalidOperationException("Money.Factory service is not registered.");
+
+        CustomerRepository = fixture.ServiceProvider.GetService<ICustomerRepository>()
+            ?? throw new InvalidOperationException("CustomerRepository service is not registered.");
+
+        PaymentRepository = fixture.ServiceProvider.GetService<IPaymentRepository>()
+            ?? throw new InvalidOperationException("PaymentRepository service is not registered.");
+
+        LoanRepository = fixture.ServiceProvider.GetService<ILoanRepository>()
+            ?? throw new InvalidOperationException("LoanRepository service is not registered.");
     }
 }

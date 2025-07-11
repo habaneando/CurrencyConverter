@@ -10,6 +10,6 @@ public class LoanCalculator(Money.Factory moneyFactory) : ILoanCalculator
         //var denominator = 1 - Math.Pow(1 + (double)monthlyRate, -loan.Term.Months);
         //var monthlyPayment = (decimal)(numerator / denominator);
 
-        return moneyFactory.Create(loan.Principal.Amount, "EUR");
+        return moneyFactory.Create(loan.Amount, "EUR");
     }
 }

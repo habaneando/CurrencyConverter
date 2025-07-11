@@ -5,7 +5,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Enums\" />
     <Folder Include="Events\" />
     <Folder Include="ExternalServiceContracts\" />
     <Folder Include="EventHandlerContracts\" />
