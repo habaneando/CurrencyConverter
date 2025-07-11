@@ -13,13 +13,13 @@ public sealed record Currency
         string symbol,
         int decimalPlaces)
     {
-        Guard.EmptyCurrencyCode(code);
+        Guards.EmptyCurrencyCode(code);
 
-        Guard.InvalidISOCurrencyCode(code);
+        Guards.InvalidISOCurrencyCode(code);
 
-        Guard.EmptyCurrencySymbol(symbol);
+        Guards.EmptyCurrencySymbol(symbol);
 
-        Guard.NegativeDecimalPlaces(decimalPlaces);
+        Guards.NegativeDecimalPlaces(decimalPlaces);
 
         Code = code.ToUpperInvariant();
 
@@ -32,9 +32,9 @@ public sealed record Currency
     {
         public async Task<Currency> Create(string currencyCode)
         {
-            Guard.EmptyCurrencyCode(currencyCode);
+            Guards.EmptyCurrencyCode(currencyCode);
 
-            Guard.InvalidISOCurrencyCode(currencyCode); 
+            Guards.InvalidISOCurrencyCode(currencyCode); 
 
             var info = await CurrencyProvider.GetCurrencyInfo(currencyCode)
                 .ConfigureAwait(false);

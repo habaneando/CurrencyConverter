@@ -1,6 +1,6 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public static class Guard
+public static class Guards
 {
     public static void NegativeAmount(decimal amount)
     {

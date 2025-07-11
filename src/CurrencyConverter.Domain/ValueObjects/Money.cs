@@ -14,11 +14,11 @@ public sealed record Money
 
     private Money(decimal amount, Currency currency)
     {
-        Guard.NegativeAmount(amount);
+        Guards.NegativeAmount(amount);
 
-        Guard.EmptyCurrency(currency);
+        Guards.EmptyCurrency(currency);
 
-        Guard.DifferentAmountPrecisionAndDecimalPlaces(amount, currency);
+        Guards.DifferentAmountPrecisionAndDecimalPlaces(amount, currency);
 
         Amount = amount;
 
@@ -27,14 +27,14 @@ public sealed record Money
 
     public Money Add(Money other)
     {
-        Guard.AddDifferentCurrencyCode(Currency, other.Currency);
+        Guards.AddDifferentCurrencyCode(Currency, other.Currency);
 
         return new Money(Amount + other.Amount, Currency);
     }
 
     public Money Subtract(Money other)
     {
-        Guard.SubstractDifferentCurrencyCode(Currency, other.Currency); 
+        Guards.SubstractDifferentCurrencyCode(Currency, other.Currency); 
 
         var result = Amount - other.Amount;
 
@@ -43,14 +43,14 @@ public sealed record Money
 
     public Money Multiply(decimal factor)
     {
-        Guard.NegativeFactor(factor);
+        Guards.NegativeFactor(factor);
 
         return new Money(Amount * factor, Currency);
     }
 
     public Money Divide(decimal divisor)
     {
-        Guard.NonDivideByZero(divisor);
+        Guards.NonDivideByZero(divisor);
 
         return new Money(Amount / divisor, Currency);
     }
@@ -59,7 +59,7 @@ public sealed record Money
     {
         if (other == null) return 1;
 
-        Guard.DifferentCurrency(Currency, other.Currency);
+        Guards.DifferentCurrency(Currency, other.Currency);
 
         return Amount.CompareTo(other.Amount);
     }
@@ -92,11 +92,11 @@ public sealed record Money
     {
         public async Task<Money> Create(decimal amount, string currencyCode)
         {
-            Guard.NegativeAmount(amount);
+            Guards.NegativeAmount(amount);
 
-            Guard.EmptyCurrencyCode(currencyCode);
+            Guards.EmptyCurrencyCode(currencyCode);
 
-            Guard.EmptyCurrencyCode(currencyCode);
+            Guards.EmptyCurrencyCode(currencyCode);
 
             var currency = await CurrencyFactory.Create(currencyCode)
                 .ConfigureAwait(false);
@@ -106,9 +106,9 @@ public sealed record Money
 
         public Money Create(decimal amount, Currency currency)
         {
-            Guard.NegativeAmount(amount);
+            Guards.NegativeAmount(amount);
 
-            Guard.EmptyCurrency(currency);
+            Guards.EmptyCurrency(currency);
 
             return new Money(amount, currency);
         }
