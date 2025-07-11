@@ -1,6 +1,5 @@
 ﻿namespace CurrencyConverter.Domain;
 
-// Has ID, tracks state, owns logic tied to its own data
 public class Loan
 {
     public Guid Id { get; init; }

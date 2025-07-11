@@ -1,3 +1,3 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public record CurrencyInfo(string Code, string Symbol, int DecimalPlaces);
+public sealed record CurrencyInfo(string Code, string Symbol, int DecimalPlaces);
