@@ -61,7 +61,10 @@ public class LoanService : ILoanService
                select result;
     }
 
-    public bool CanApproveNewLoan(int customerId, decimal requestedAmount, LoanType loanType)
+    public bool CanApproveNewLoan(
+        int customerId,
+        decimal requestedAmount,
+        LoanType loanType)
     {
         var customer = _customerRepo.GetById(customerId);
 
@@ -117,7 +120,10 @@ public class LoanService : ILoanService
         return Math.Round(baseLimit, 2);
     }
 
-    public bool IsCustomerEligibleForRefinancing(int customerId, decimal newAmount, decimal newRate)
+    public bool IsCustomerEligibleForRefinancing(
+        int customerId,
+        decimal newAmount,
+        decimal newRate)
     {
         var customer = _customerRepo.GetById(customerId);
 
@@ -221,7 +227,11 @@ public class LoanService : ILoanService
         return Math.Round(onTimePercentage, 1);
     }
 
-    private string DetermineRiskLevel(Customer customer, int latePaymentCount, decimal totalLoanAmount, bool hasDefaultHistory)
+    private string DetermineRiskLevel(
+        Customer customer,
+        int latePaymentCount,
+        decimal totalLoanAmount,
+        bool hasDefaultHistory)
     {
         // High Risk Criteria
         if (hasDefaultHistory) return "High Risk";
