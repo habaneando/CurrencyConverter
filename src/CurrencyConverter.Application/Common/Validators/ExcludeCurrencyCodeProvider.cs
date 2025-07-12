@@ -1,14 +1,14 @@
 ﻿namespace CurrencyConverter.Application;
 
-public class ExcludedCurrencyProvider(ICurrencyProvider CurrencyProvider)
+public class ExcludedCurrencyProvider(ICurrencyRepository CurrencyRepository)
     : IExcludedCurrencyProvider
 {
     public List<CurrencyInfo> Currencies =>
         new List<CurrencyInfo>
         {
-            CurrencyProvider.GetCurrencyInfo("TRY").GetAwaiter().GetResult(),
-            CurrencyProvider.GetCurrencyInfo("PLN").GetAwaiter().GetResult(),
-            CurrencyProvider.GetCurrencyInfo("THB").GetAwaiter().GetResult(),
-            CurrencyProvider.GetCurrencyInfo("MXN").GetAwaiter().GetResult()
+            CurrencyRepository.GetCurrencyInfoAsync("TRY").GetAwaiter().GetResult(),
+            CurrencyRepository.GetCurrencyInfoAsync("PLN").GetAwaiter().GetResult(),
+            CurrencyRepository.GetCurrencyInfoAsync("THB").GetAwaiter().GetResult(),
+            CurrencyRepository.GetCurrencyInfoAsync("MXN").GetAwaiter().GetResult()
         };
 }

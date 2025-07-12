@@ -16,7 +16,7 @@ public class Loan : Entity
 
     public DateTime ApprovalDate { get; init; }
 
-    public ILoanCalculator LoanCalculator { get; init; }
+    public IPaymentCalculatorService LoanCalculator { get; init; }
 
     public Loan(
         int id,

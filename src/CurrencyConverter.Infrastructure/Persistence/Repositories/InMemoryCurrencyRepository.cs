@@ -1,6 +1,6 @@
-﻿namespace CurrencyConverter.Domain;
+﻿namespace CurrencyConverter.Infrastructure;
 
-public class InMemoryCurrencyProvider : ICurrencyProvider
+public class InMemoryCurrencyRepository : ICurrencyRepository
 {
     private readonly Dictionary<string, CurrencyInfo> _currencies = new()
     {
@@ -16,7 +16,7 @@ public class InMemoryCurrencyProvider : ICurrencyProvider
         { "MXN", new("MXN", "$", 2) }
     };
 
-    public Task<CurrencyInfo> GetCurrencyInfo(string currencyCode)
+    public Task<CurrencyInfo> GetCurrencyInfoAsync(string currencyCode)
     {
         if (!_currencies.TryGetValue(currencyCode.ToUpperInvariant(), out var info))
             throw new InvalidISOCodeCurrencyCreationException(currencyCode);

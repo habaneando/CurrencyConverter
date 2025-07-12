@@ -5,7 +5,7 @@ public abstract class BaseDomainTests<TFixture> : IClassFixture<TFixture>
 {
     protected readonly TFixture Fixture;
 
-    public ICurrencyProvider CurrencyProvider { get; init; }
+    public ICurrencyRepository CurrencyRepository { get; init; }
 
     public Currency.Factory CurrencyFactory { get; init; }
 
@@ -22,7 +22,7 @@ public abstract class BaseDomainTests<TFixture> : IClassFixture<TFixture>
         Fixture = fixture
             ?? throw new ArgumentNullException(nameof(fixture));
 
-        CurrencyProvider = fixture.ServiceProvider.GetService<ICurrencyProvider>()
+        CurrencyRepository = fixture.ServiceProvider.GetService<ICurrencyRepository>()
             ?? throw new InvalidOperationException("CurrencyProvider service is not registered.");
 
         CurrencyFactory = fixture.ServiceProvider.GetService<Currency.Factory>()

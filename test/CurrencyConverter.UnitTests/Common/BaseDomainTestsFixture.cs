@@ -10,7 +10,7 @@ public class BaseDomainTestsFixture : IDisposable
     {
         var services = new ServiceCollection();
 
-        services.AddSingleton<ICurrencyProvider, InMemoryCurrencyProvider>();
+        services.AddSingleton<ICurrencyRepository, InMemoryCurrencyRepository>();
 
         services.AddSingleton<Currency.Factory>();
 

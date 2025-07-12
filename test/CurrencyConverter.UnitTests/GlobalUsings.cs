@@ -1,5 +1,4 @@
 ﻿global using CurrencyConverter.Domain;
+global using CurrencyConverter.Infrastructure;
 global using Shouldly;
-global using System.Reflection;
 global using Microsoft.Extensions.DependencyInjection;
-global using Xunit.Sdk;

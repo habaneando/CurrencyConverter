@@ -1,6 +1,4 @@
-﻿using CurrencyConverter.Domain;
-
-namespace CurrencyConverter.Infrastructure;
+﻿namespace CurrencyConverter.Infrastructure;
 
 public static class DI
 {
@@ -11,6 +9,8 @@ public static class DI
         services.AddScoped<IPaymentRepository, PaymentRepository>();
 
         services.AddScoped<ILoanRepository, LoanRepository>();
+
+        services.AddSingleton<ICurrencyRepository, InMemoryCurrencyRepository>();
 
         return services;
     }

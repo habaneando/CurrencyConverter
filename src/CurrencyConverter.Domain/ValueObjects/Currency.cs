@@ -28,7 +28,7 @@ public sealed record Currency
         DecimalPlaces = decimalPlaces;
     }
 
-    public class Factory(ICurrencyProvider CurrencyProvider)
+    public class Factory(ICurrencyRepository CurrencyRepository)
     {
         public async Task<Currency> Create(string currencyCode)
         {
@@ -36,7 +36,7 @@ public sealed record Currency
 
             Guards.InvalidISOCurrencyCode(currencyCode); 
 
-            var info = await CurrencyProvider.GetCurrencyInfo(currencyCode)
+            var info = await CurrencyRepository.GetCurrencyInfoAsync(currencyCode)
                 .ConfigureAwait(false);
 
             return new Currency(

@@ -1,5 +1,5 @@
 ﻿namespace CurrencyConverter.Domain;
 
-public class LoanService : ILoanService
+public interface ILoanService
 {
 }
