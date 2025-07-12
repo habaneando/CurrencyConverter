@@ -2,24 +2,39 @@
 
 public class PaymentRepository : IPaymentRepository
 {
-    public Task<IEnumerable<Payment>> GetAllPaymentsAsync()
-    {
-        var payments = new List<Payment>
-        {
-            new (1, 1, 500, DateTime.Now.AddMonths(-1), false),
-            new (2, 1, 500, DateTime.Now.AddDays(-15), true),
-            new (3, 2, 1800, DateTime.Now.AddMonths(-1), false),
-            new (4, 2, 1800, DateTime.Now.AddDays(-10), false),
-            new (5, 4, 850, DateTime.Now.AddMonths(-1), false),
-            new (6, 4, 850, DateTime.Now.AddDays(-20), true),
-            new (7, 5, 400, DateTime.Now.AddMonths(-2), true),
-            new (8, 6, 750, DateTime.Now.AddMonths(-1), false),
-            new (9, 8, 1500, DateTime.Now.AddDays(-5), false),
-            new (10, 10, 780, DateTime.Now.AddMonths(-1), false),
-            new (11, 10, 780, DateTime.Now.AddDays(-25), true),
-            new (12, 3, 350, DateTime.Now.AddMonths(-3), false)
-        };
+    private readonly List<Payment> _payments;
 
-        return Task.FromResult<IEnumerable<Payment>>(payments);
+    public PaymentRepository(List<Payment> payments)
+    {
+        _payments = payments;
     }
+
+    public IEnumerable<Payment> FindLatePayments() =>
+        _payments.Where(p => p.IsLatePayment());
+
+    public IEnumerable<Payment> GetByLoan(int loanId) =>
+        _payments.Where(p => p.LoanId == loanId);
+
+    public IEnumerable<Payment> GetRecentPayments(int daysThreshold = 30) =>
+        _payments.Where(p => p.IsRecentPayment(daysThreshold));
+
+    public IEnumerable<Payment> GetByDateRange(DateTime startDate, DateTime endDate) =>
+        _payments.Where(p =>
+            p.PaymentDate >= startDate &&
+            p.PaymentDate <= endDate);
+
+    public decimal GetTotalPaymentsForLoan(int loanId) =>
+        _payments.Where(p => p.LoanId == loanId)
+            .Sum(p => p.Amount);
+
+    public IEnumerable<object> GetLatePaymentAnalysis() =>
+        _payments.Where(p => p.IsLatePayment())
+            .GroupBy(p => p.LoanId)
+            .Select(g => new
+            {
+                LoanId = g.Key,
+                LatePaymentCount = g.Count(),
+                TotalLateAmount = g.Sum(p => p.Amount),
+                TotalLateFees = g.Sum(p => p.CalculateLateFee())
+            });
 }

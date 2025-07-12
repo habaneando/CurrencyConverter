@@ -2,24 +2,46 @@
 
 public class LoanRepository : ILoanRepository
 {
-    public Task<IEnumerable<Loan>> GetAllLoansAsync()
-    {
-        var loans = new List<Loan>
-        {
-            new (1, 1, 25000, 5.5m, 60, LoanStatus.Active, DateTime.Now.AddMonths(-18), LoanType.Personal),
-            new (2, 2, 350000, 3.2m, 360, LoanStatus.Active, DateTime.Now.AddMonths(-12), LoanType.Mortgage),
-            new (3, 3, 15000, 7.8m, 48, LoanStatus.Closed, DateTime.Now.AddMonths(-6), LoanType.Auto),
-            new (4, 4, 75000, 4.5m, 120, LoanStatus.Active, DateTime.Now.AddMonths(-24), LoanType.Business),
-            new (5, 5, 12000, 6.2m, 36, LoanStatus.Default, DateTime.Now.AddMonths(-8), LoanType.Personal),
-            new (6, 6, 45000, 4.8m, 72, LoanStatus.Active, DateTime.Now.AddMonths(-30), LoanType.Business),
-            new (7, 7, 20000, 8.5m, 60, LoanStatus.Pending, DateTime.Now.AddDays(-15), LoanType.Auto),
-            new (8, 8, 280000, 3.8m, 360, LoanStatus.Active, DateTime.Now.AddMonths(-15), LoanType.Mortgage),
-            new (9, 9, 8000, 9.2m, 24, LoanStatus.Closed, DateTime.Now.AddMonths(-4), LoanType.Personal),
-            new (10, 10, 55000, 5.1m, 84, LoanStatus.Active, DateTime.Now.AddMonths(-9), LoanType.Business),
-            new (11, 1, 18000, 7.5m, 60, LoanStatus.Rejected, DateTime.Now.AddMonths(-3), LoanType.Auto),
-            new (12, 3, 30000, 4.2m, 120, LoanStatus.Active, DateTime.Now.AddMonths(-36), LoanType.Student)
-        };
+    private readonly List<Loan> _loans;
 
-        return Task.FromResult<IEnumerable<Loan>>(loans);
+    public LoanRepository(List<Loan> loans)
+    {
+        _loans = loans;
     }
+
+    public IEnumerable<Loan> FindLargeActiveLoans(decimal threshold = 50000) =>
+        _loans.Where(l =>
+            l.IsActive() &&
+            l.IsLargeAmount(threshold));
+
+    public IEnumerable<Loan> GetByStatus(LoanStatus status) =>
+        _loans.Where(l => l.Status == status);
+
+    public IEnumerable<Loan> GetByType(LoanType type) =>
+        _loans.Where(l => l.Type == type);
+
+    public IEnumerable<Loan> GetHighRiskLoans() =>
+        _loans.Where(l => l.IsHighRisk());
+
+    public IEnumerable<Loan> GetByCustomer(int customerId) =>
+        _loans.Where(l => l.CustomerId == customerId);
+
+    public IEnumerable<Loan> GetByRiskLevel(LoanRiskLevel riskLevel) =>
+        _loans.Where(l => l.GetRiskLevel() == riskLevel);
+
+    public IEnumerable<IGrouping<LoanStatus, Loan>> GetGroupedByStatus() =>
+        _loans.GroupBy(l => l.Status);
+
+    public IEnumerable<IGrouping<LoanType, Loan>> GetGroupedByType() =>
+        _loans.GroupBy(l => l.Type);
+
+    public object GetStatistics() =>
+        new
+        {
+            TotalLoans = _loans.Count(),
+            TotalAmount = _loans.Sum(l => l.Amount),
+            AverageAmount = _loans.Average(l => l.Amount),
+            MaxAmount = _loans.Max(l => l.Amount),
+            MinAmount = _loans.Min(l => l.Amount)
+        };
 }

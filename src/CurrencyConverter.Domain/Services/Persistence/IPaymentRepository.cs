@@ -2,5 +2,10 @@
 
 public interface IPaymentRepository
 {
-    Task<IEnumerable<Payment>> GetAllPaymentsAsync();
+    IEnumerable<Payment> FindLatePayments();
+    IEnumerable<Payment> GetByLoan(int loanId);
+    IEnumerable<Payment> GetRecentPayments(int daysThreshold = 30);
+    IEnumerable<Payment> GetByDateRange(DateTime startDate, DateTime endDate);
+    decimal GetTotalPaymentsForLoan(int loanId);
+    IEnumerable<object> GetLatePaymentAnalysis();
 }
