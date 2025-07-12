@@ -25,6 +25,8 @@ public class BaseDomainTestsFixture : IDisposable
         services.AddScoped<ICustomerRepository>(sp =>
             new InMemoryCustomerRepository(InMemoryCustomerRepositorySeed.Data));
 
+        services.AddScoped<ILoanService, LoanService>();
+
         ServiceProvider = services.BuildServiceProvider();
     }
 

@@ -4,14 +4,24 @@ public class LoanServiceTests : BaseDomainTests<BaseDomainTestsFixture>
 {
     public LoanServiceTests(BaseDomainTestsFixture fixture) : base(fixture){}
 
-    [Theory]
-    [MemberData(nameof(LoanServiceData.CreateCurrency_GivenValidCurrencyCode_ShouldBeSuccess), MemberType = typeof(LoanServiceData))]
-    public async Task CreateCurrency_GivenValidCurrencyCode_ShouldBeSuccess(string currencyCode)
+    [Fact]
+    public void LoanServiceGetCustomerLoansWithDetails_ShouldBeSuccess()
     {
-        var currency = await CurrencyFactory.Create(currencyCode);
+        var customerLoans = LoanService.GetCustomerLoansWithDetails();
 
-        currency.ShouldNotBeNull();
+        customerLoans.ShouldNotBeNull();
 
-        currency.Code.ShouldBe(currencyCode.ToUpperInvariant());
+        customerLoans.ShouldNotBeEmpty();
+    }
+
+    [Theory]
+    [MemberData(nameof(LoanServiceData.LoanServiceGetTopCustomersByLoanAmount_GivenValidCount_ShouldBeSuccess), MemberType = typeof(LoanServiceData))]
+    public void LoanServiceGetTopCustomersByLoanAmount_GivenValidCount_ShouldBeSuccess(int count)
+    {
+        var customers = LoanService.GetTopCustomersByLoanAmount(count);
+
+        customers.ShouldNotBeNull();
+
+        customers.ShouldNotBeEmpty();
     }
 }

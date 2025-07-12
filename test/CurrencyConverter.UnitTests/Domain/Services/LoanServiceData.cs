@@ -2,20 +2,12 @@
 
 public class LoanServiceData
 {
-    public static IEnumerable<object[]> CreateCurrency_GivenValidCurrencyCode_ShouldBeSuccess =>
+    public static IEnumerable<object[]> LoanServiceGetTopCustomersByLoanAmount_GivenValidCount_ShouldBeSuccess =>
        new List<object[]>
        {
             new object[]
             {
-                "PLN"
-            },
-            new object[]
-            {
-                "THB"
-            },
-            new object[]
-            {
-                "GBP"
+                5
             }
        };
 }

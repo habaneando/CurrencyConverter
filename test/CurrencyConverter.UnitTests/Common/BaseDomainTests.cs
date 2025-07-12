@@ -17,6 +17,8 @@ public abstract class BaseDomainTests<TFixture> : IClassFixture<TFixture>
 
     public ILoanRepository LoanRepository { get; init; }
 
+    public ILoanService LoanService { get; init; }
+
     protected BaseDomainTests(TFixture fixture)
     {
         Fixture = fixture
@@ -39,5 +41,8 @@ public abstract class BaseDomainTests<TFixture> : IClassFixture<TFixture>
 
         LoanRepository = fixture.ServiceProvider.GetService<ILoanRepository>()
             ?? throw new InvalidOperationException("LoanRepository service is not registered.");
+
+        LoanService = fixture.ServiceProvider.GetService<ILoanService>()
+            ?? throw new InvalidOperationException("LoanService service is not registered.");
     }
 }
