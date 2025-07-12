@@ -1,10 +1,10 @@
-﻿namespace CurrencyConverter.Domain;
+﻿namespace CurrencyConverter.Infrastructure;
 
-public class LoanRepository : ILoanRepository
+public class InMemoryLoanRepository : ILoanRepository
 {
     private readonly List<Loan> _loans;
 
-    public LoanRepository(List<Loan> loans)
+    public InMemoryLoanRepository(List<Loan> loans)
     {
         _loans = loans;
     }

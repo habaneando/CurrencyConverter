@@ -1,10 +1,10 @@
-﻿namespace CurrencyConverter.Domain;
+﻿namespace CurrencyConverter.Infrastructure;
 
-public class CustomerRepository : ICustomerRepository
+public class InMemoryCustomerRepository : ICustomerRepository
 {
     private readonly List<Customer> _customers;
 
-    public CustomerRepository(List<Customer> customers)
+    public InMemoryCustomerRepository(List<Customer> customers)
     {
         _customers = customers;
     }

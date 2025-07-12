@@ -4,11 +4,14 @@ public static class DI
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<ILoanRepository>(sp =>
+            new InMemoryLoanRepository(InMemoryLoanRepositorySeed.Data));
 
-        services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<IPaymentRepository>(sp =>
+            new InMemoryPaymentRepository(InMemoryPaymentRepositorySeed.Data));
 
-        services.AddScoped<ILoanRepository, LoanRepository>();
+        services.AddScoped<ICustomerRepository>(sp =>
+            new InMemoryCustomerRepository(InMemoryCustomerRepositorySeed.Data));
 
         services.AddSingleton<ICurrencyRepository, InMemoryCurrencyRepository>();
 

@@ -1,10 +1,10 @@
-﻿namespace CurrencyConverter.Domain;
+﻿namespace CurrencyConverter.Infrastructure;
 
-public class PaymentRepository : IPaymentRepository
+public class InMemoryPaymentRepository : IPaymentRepository
 {
     private readonly List<Payment> _payments;
 
-    public PaymentRepository(List<Payment> payments)
+    public InMemoryPaymentRepository(List<Payment> payments)
     {
         _payments = payments;
     }
